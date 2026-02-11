@@ -9,49 +9,53 @@ A repo consolidates agent evaluation methods and experiments.
 | 多模型对比评估             | **lm-evaluation-harness / opencompass** |
 | 底层 observability 支撑 | Phoenix、Langfuse（非评估主体但可结合）             |
 
+# 🚀 Hierarchical Agent Evaluation Framework
 
+> Evaluating Multi-Tool LLM Agents Beyond Final Answers
 
-🔥 Agent Reliability Evaluation Framework
+Modern LLM agents are no longer single-step QA systems.  
+They decompose user queries, route across tools (NL2SQL, RAG, APIs), and synthesize multi-stage reasoning into final responses.
 
-包括：
+However, most evaluation frameworks still focus only on:
 
-Relevance Score (LLM Judge)
+- Final answer correctness  
+- Static benchmark accuracy  
 
-Hallucination Detection
+This repository proposes a different perspective:
 
-Tool-grounded Verification
+> Multi-stage, tool-grounded, hierarchical evaluation for LLM agents.
 
-Self-consistency Score
+---
 
-Format Validation
+## 🔍 Why This Project?
 
-Stability Benchmark
+As multi-tool agents become production systems, failure no longer happens only at the final response layer.
 
-输出：
+It happens at:
 
-每个问题的评分
+- ❌ Incorrect task decomposition  
+- ❌ Wrong tool routing (SQL vs RAG)  
+- ❌ Invalid SQL generation  
+- ❌ Retrieval hallucination  
+- ❌ Unsupported synthesis  
 
-汇总报告
+Evaluating only the final answer hides systemic failures.
 
-JSON log
+This project introduces:
 
-可视化图表
+> A structured evaluation framework that inspects each decision layer of an agent pipeline.
 
-agent-eval-framework/
-│
-├── evaluator/
-│   ├── routing_eval.py
-│   ├── decomposition_eval.py
-│   ├── sql_eval.py
-│   ├── rag_eval.py
-│   ├── faithfulness_eval.py
-│
-├── core/
-│   ├── runner.py
-│   ├── metrics.py
-│   ├── report.py
-│
-├── examples/
-│   ├── sample_queries.json
-│
-└── README.md
+---
+
+## 🏗 Target Agent Architecture
+
+This framework is designed for agents that:
+
+1. Decompose user queries into sub-queries  
+2. Route each sub-query to:
+   - NL2SQL engine
+   - RAG retrieval system
+3. Synthesize tool responses into final answers  
+
+Example pipeline:
+
