@@ -9,6 +9,11 @@ A repo consolidates agent evaluation methods and experiments.
 | 多模型对比评估             | **lm-evaluation-harness / opencompass** |
 | 底层 observability 支撑 | Phoenix、Langfuse（非评估主体但可结合）             |
 
+1. reference-free evaluation
+2. Self-consistency
+3. Synthetic Test Set + LLM (LLM-generated benchmark)
+4. Property-based Testing
+
 # 🚀 Hierarchical Agent Evaluation Framework
 
 > Evaluating Multi-Tool LLM Agents Beyond Final Answers
