@@ -59,3 +59,140 @@ This framework is designed for agents that:
 
 Example pipeline:
 
+User Query
+↓
+Decomposition
+↓
+Routing (SQL / RAG)
+↓
+Tool Execution
+↓
+Final Answer
+
+
+---
+
+## 🧠 Core Idea: Hierarchical Evaluation
+
+Instead of asking:
+
+> "Is the final answer correct?"
+
+We ask:
+
+1. Was the query decomposition reasonable?
+2. Was the routing decision appropriate?
+3. Was the tool output correctly utilized?
+4. Is the final answer faithful to tool outputs?
+
+This enables deeper reliability analysis and better production debugging.
+
+---
+
+## 📊 Evaluation Dimensions
+
+### 1️⃣ Decomposition Quality
+- Coverage of user intent  
+- Logical consistency  
+- Redundancy detection  
+
+### 2️⃣ Routing Accuracy
+- Correct tool selection (SQL vs RAG)  
+- LLM-based oracle comparison  
+- Decision consistency  
+
+### 3️⃣ Tool-Level Validation
+
+#### SQL Evaluation
+- Syntax validation  
+- Execution success  
+- Required column presence  
+- Aggregation correctness  
+
+#### RAG Evaluation
+- Context grounding  
+- Hallucination detection  
+- Attribution verification  
+
+### 4️⃣ Faithfulness Evaluation
+- Final answer grounded in tool outputs  
+- No unsupported claims  
+- No contradictions  
+
+### 5️⃣ Stability & Consistency
+- Multi-run self-consistency  
+- Embedding similarity analysis  
+- Variance measurement  
+
+---
+
+## 🛠 Design Principles
+
+- ✅ Fully local Python-based evaluation  
+- ✅ No dependency on SaaS observability platforms  
+- ✅ Extensible metric system  
+- ✅ Reference-free evaluation supported  
+- ✅ Suitable for CI/CD regression testing  
+
+---
+
+## 🏗 Repository Structure
+
+agent-eval-framework/
+│
+├── evaluator/
+│ ├── decomposition_eval.py
+│ ├── routing_eval.py
+│ ├── sql_eval.py
+│ ├── rag_eval.py
+│ ├── faithfulness_eval.py
+│
+├── core/
+│ ├── runner.py
+│ ├── metrics.py
+│ ├── report.py
+│
+├── examples/
+│ ├── sample_queries.json
+│
+└── README.md
+
+
+---
+
+## 🚀 Why This Matters
+
+As LLM agents move into production environments, evaluation must shift from:
+
+> Model-centric benchmarking  
+
+to  
+
+> System-level reliability engineering  
+
+This project explores evaluation as:
+
+- Agent observability  
+- Decision validation  
+- Tool-grounded reasoning verification  
+- AI reliability engineering  
+
+---
+
+## 🎯 Vision
+
+The long-term goal is to evolve this framework into:
+
+- A reusable agent evaluation engine  
+- A reliability scoring system  
+- A regression testing toolkit for production agents  
+- A foundation for trustworthy AI system design  
+
+---
+
+## 👤 Author
+
+Built as part of a transition from GenAI Data Scientist to AI Systems Architect,  
+with a focus on agent reliability, evaluation design, and AI product engineering.
+```
+
