@@ -57,6 +57,7 @@ This framework is designed for agents that:
    - RAG retrieval system
 3. Synthesize tool responses into final answers  
 
+```
 Example pipeline:
 
 User Query
@@ -68,7 +69,7 @@ Routing (SQL / RAG)
 Tool Execution
 ↓
 Final Answer
-
+```
 
 ---
 
@@ -137,7 +138,7 @@ This enables deeper reliability analysis and better production debugging.
 ---
 
 ## 🏗 Repository Structure
-
+```
 agent-eval-framework/
 │
 ├── evaluator/
@@ -156,7 +157,7 @@ agent-eval-framework/
 │ ├── sample_queries.json
 │
 └── README.md
-
+```
 
 ---
 
