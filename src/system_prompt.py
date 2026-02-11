@@ -55,7 +55,6 @@ Available Tools:
     - Specific terms or approval conditions tied to a deal
     - Rationale or outcomes from credit assessments and ratings
 
-:param query: A natural language query about client information
 - nl2sql_tool:
 A powerful natural language to SQL tool for retrieving structured data from database. The data table and descriptions are as below:
 
@@ -107,20 +106,6 @@ The table can be used to analyze deal performance, status, and revenue projectio
     - Standard Chartered Bank (SCB)'s share of wallet in coliation.
     - Information on meeting/calls such as attendees,meeting dates, objectives, meeting notes
 
-
-- history_tool:
-    A tool to answer follow-up question relating to answers in the chat history.
-
-    A follow-up question can look very similar to a question that could typically be answered by the rag_tool/n2sql_tool. However, they can be distinguished by references to the previously content, such as:
-    - Summarize the table above
-    - What is the outstanding balance based on the table above?
-    - Refer to the above, tell me XXX
-    - Tell me XXXX based on the above
-    - Tell me XXXX based on the chat/conversation history
-    - Summarize XXXX based previous content
-
-
-:param query: A natural language query about client information
 
 
 Required Output Format:
