@@ -5,13 +5,16 @@ Uses DeepEval for faithfulness scoring
 """
 
 import os
-from typing import Dict, Any, List, Optional
-from dataclasses import dataclass
 
-# Disable DeepEval telemetry
+# Disable DeepEval telemetry BEFORE any imports
 os.environ["CONFIDENT_AI_API_KEY"] = ""
 os.environ["DEEPEVAL_TELEMETRY"] = "OFF"
 os.environ["CONFIDENT_METRIC_LOGGING_VERBOSE"] = "0"
+os.environ["DEEPEVAL_ALLOW_TELEMETRY"] = "NO"
+os.environ["POSTHOG_API_KEY"] = ""
+
+from typing import Dict, Any, List, Optional
+from dataclasses import dataclass
 
 from deepeval import evaluate
 from deepeval.metrics import FaithfulnessMetric, AnswerRelevancyMetric
