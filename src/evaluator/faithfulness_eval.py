@@ -8,6 +8,11 @@ import os
 from typing import Dict, Any, List, Optional
 from dataclasses import dataclass
 
+# Disable DeepEval telemetry
+os.environ["CONFIDENT_AI_API_KEY"] = ""
+os.environ["DEEPEVAL_TELEMETRY"] = "OFF"
+os.environ["CONFIDENT_METRIC_LOGGING_VERBOSE"] = "0"
+
 from deepeval import evaluate
 from deepeval.metrics import FaithfulnessMetric, AnswerRelevancyMetric
 from deepeval.test_case import LLMTestCase
@@ -21,10 +26,10 @@ load_dotenv()
 @dataclass
 class FaithfulnessResult:
     """Result of faithfulness evaluation"""
-    score: float
-    passed: bool
-    reason: str
-    metric_name: str
+    score: float = 0.0
+    passed: bool = False
+    reason: str = ""
+    metric_name: str = ""
 
 
 class FaithfulnessEvaluator:
