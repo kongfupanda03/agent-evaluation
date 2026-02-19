@@ -17,7 +17,7 @@ from typing import Dict, Any, List, Optional
 from dataclasses import dataclass
 
 from deepeval import evaluate
-from deepeval.metrics import FaithfulnessMetric, AnswerRelevancyMetric
+from deepeval.metrics import FaithfulnessMetric
 from deepeval.test_case import LLMTestCase
 from deepeval.models.base_model import DeepEvalBaseLLM
 from langchain_openai import ChatOpenAI
@@ -89,12 +89,6 @@ class FaithfulnessEvaluator:
             model=custom_llm,
             include_reason=True
         )
-        
-        self.relevancy_metric = AnswerRelevancyMetric(
-            threshold=self.threshold,
-            model=custom_llm,
-            include_reason=True
-        )
     
     def evaluate(
         self,
@@ -133,14 +127,77 @@ class FaithfulnessEvaluator:
             metric_name="faithfulness"
         )
     
-    def evaluate_with_relevancy(
+    def evaluate_query_answered(
+        self,
+        query: str,
+        final_answer: str
+    ) -> FaithfulnessResult:
+        """
+        Custom evaluation: Check if final answer actually answers the user query
+        Uses LLM-as-judge to verify answer addresses query intent
+        
+        Args:
+            query: Original user query
+            final_answer: Final synthesized answer from agent
+            
+        Returns:
+            FaithfulnessResult with score and assessment
+        """
+        llm = ChatOpenAI(
+            model=self.model,
+            temperature=0,
+            api_key=os.getenv("OPENAI_API_KEY")
+        )
+        
+        judge_prompt = f"""You are an evaluator assessing whether an answer properly addresses a user query.
+
+User Query: {query}
+
+Final Answer: {final_answer}
+
+Evaluate whether the final answer:
+1. Directly addresses what the user asked for
+2. Provides the information requested (even if in structured/tabular format)
+3. Does not ignore parts of the query
+
+Score from 0.0 to 1.0:
+- 1.0: Perfectly answers the query
+- 0.7-0.9: Good answer, minor gaps
+- 0.4-0.6: Partial answer, missing some information
+- 0.0-0.3: Does not answer the query or completely wrong
+
+Respond in this exact format:
+SCORE: [number between 0.0 and 1.0]
+REASON: [brief explanation of why this score was given]
+"""
+        
+        response = llm.invoke(judge_prompt).content
+        
+        # Parse score and reason
+        import re
+        score_match = re.search(r'SCORE:\s*(\d+\.?\d*)', response)
+        reason_match = re.search(r'REASON:\s*(.+?)(?=\n|$)', response, re.DOTALL)
+        
+        score = float(score_match.group(1)) if score_match else 0.0
+        reason = reason_match.group(1).strip() if reason_match else "Could not parse evaluation"
+        
+        return FaithfulnessResult(
+            score=score,
+            passed=score >= self.threshold,
+            reason=reason,
+            metric_name="query_answered"
+        )
+    
+    def evaluate_comprehensive(
         self,
         query: str,
         tool_outputs: Dict[str, Any],
         final_answer: str
     ) -> Dict[str, FaithfulnessResult]:
         """
-        Evaluate both faithfulness and answer relevancy
+        Comprehensive evaluation:
+        - Faithfulness: Checks answer is grounded in tool outputs (no hallucination)
+        - Query Answered: Checks answer actually addresses user query
         
         Args:
             query: Original user query
@@ -150,33 +207,15 @@ class FaithfulnessEvaluator:
         Returns:
             Dictionary with both evaluation results
         """
-        # Combine tool outputs into retrieval context
-        retrieval_context = self._format_tool_outputs(tool_outputs)
+        # Run faithfulness evaluation (for RAG grounding)
+        faithfulness_result = self.evaluate(query, tool_outputs, final_answer)
         
-        # Create test case
-        test_case = LLMTestCase(
-            input=query,
-            actual_output=final_answer,
-            retrieval_context=[retrieval_context]
-        )
-        
-        # Run both metrics
-        self.faithfulness_metric.measure(test_case)
-        self.relevancy_metric.measure(test_case)
+        # Run query-answered evaluation
+        query_answered_result = self.evaluate_query_answered(query, final_answer)
         
         return {
-            "faithfulness": FaithfulnessResult(
-                score=self.faithfulness_metric.score,
-                passed=self.faithfulness_metric.is_successful(),
-                reason=self.faithfulness_metric.reason,
-                metric_name="faithfulness"
-            ),
-            "answer_relevancy": FaithfulnessResult(
-                score=self.relevancy_metric.score,
-                passed=self.relevancy_metric.is_successful(),
-                reason=self.relevancy_metric.reason,
-                metric_name="answer_relevancy"
-            )
+            "faithfulness": faithfulness_result,
+            "query_answered": query_answered_result
         }
     
     def _format_tool_outputs(self, tool_outputs: Dict[str, Any]) -> str:
@@ -295,13 +334,14 @@ def main():
     print(f"Passed: {result2.passed}")
     print(f"Reason: {result2.reason}")
     
-    # Evaluate with both metrics
-    print("\n--- Combined Metrics (Faithful) ---")
-    combined = evaluator.evaluate_with_relevancy(query, tool_outputs, faithful_answer)
+    # Evaluate with comprehensive metrics
+    print("\n--- Comprehensive Evaluation (Faithful) ---")
+    combined = evaluator.evaluate_comprehensive(query, tool_outputs, faithful_answer)
     for metric_name, result in combined.items():
         print(f"\n{metric_name}:")
         print(f"  Score: {result.score:.2f}")
         print(f"  Passed: {result.passed}")
+        print(f"  Reason: {result.reason}")
 
 
 if __name__ == "__main__":
