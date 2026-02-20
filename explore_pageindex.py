@@ -144,3 +144,210 @@ except Exception as e:
     print(f"\n✗ Error building PageIndex: {e}")
     import traceback
     traceback.print_exc()
+    sys.exit(1)
+
+# Step 5: Retrieval - Tree Search
+print("\n" + "=" * 60)
+print("Step 5: Retrieval - Tree Search")
+print("=" * 60)
+
+class PageIndexRetriever:
+    """Simple retriever that uses the PageIndex tree for reasoning-based retrieval"""
+    
+    def __init__(self, structure, pdf_path):
+        self.structure = structure
+        self.pdf_path = pdf_path
+        self.doc = fitz.open(pdf_path)
+        
+    def get_page_text(self, page_num):
+        """Get text from a specific page (1-indexed)"""
+        if 1 <= page_num <= len(self.doc):
+            return self.doc[page_num - 1].get_text()
+        return ""
+    
+    def get_node_text(self, node):
+        """Get full text for a node (all pages in its range)"""
+        start = node.get('start_index', 1)
+        end = node.get('end_index', start)
+        texts = []
+        for page_num in range(start, end + 1):
+            texts.append(self.get_page_text(page_num))
+        return "\n".join(texts)
+    
+    def flatten_tree(self, nodes=None):
+        """Flatten tree to list of all nodes"""
+        if nodes is None:
+            nodes = self.structure
+        result = []
+        for node in nodes:
+            result.append(node)
+            if 'nodes' in node and node['nodes']:
+                result.extend(self.flatten_tree(node['nodes']))
+        return result
+    
+    def tree_search(self, query, model='gpt-4o-mini'):
+        """
+        Reasoning-based retrieval using the tree structure.
+        Simulates how humans navigate a document - start from top-level, 
+        reason which section is most relevant, then drill down.
+        """
+        from pageindex.utils import ChatGPT_API, extract_json
+        
+        all_nodes = self.flatten_tree()
+        
+        # Build tree context for the LLM
+        tree_context = []
+        for node in all_nodes:
+            node_id = node.get('node_id', 'N/A')
+            title = node.get('title', '')
+            summary = node.get('summary', '')
+            start = node.get('start_index', '')
+            end = node.get('end_index', '')
+            tree_context.append(f"[{node_id}] {title} (pages {start}-{end}): {summary}")
+        
+        # Step 1: Reason which nodes are relevant
+        prompt = f"""You are given a document's table of contents and a user query.
+Your task is to identify which sections (by node_id) are most relevant to answer the query.
+
+Document Structure:
+{chr(10).join(tree_context)}
+
+User Query: {query}
+
+Instructions:
+1. Analyze which sections would contain information relevant to the query
+2. Consider both the section titles and summaries
+3. Return the node_ids of the most relevant sections (up to 3)
+4. If no sections seem relevant, return an empty list
+
+Response format (JSON):
+{{
+    "reasoning": "Explain your thinking about which sections are relevant",
+    "relevant_node_ids": ["0001", "0003", ...],
+    "confidence": "high/medium/low"
+}}
+
+Return only the JSON, no other text."""
+        
+        response = ChatGPT_API(model=model, prompt=prompt)
+        result = extract_json(response)
+        
+        relevant_ids = result.get('relevant_node_ids', [])
+        reasoning = result.get('reasoning', '')
+        
+        print(f"\nTree Search Reasoning: {reasoning[:200]}...")
+        print(f"Relevant nodes: {relevant_ids}")
+        
+        # Step 2: Retrieve text from relevant nodes
+        retrieved_contexts = []
+        for node in all_nodes:
+            if node.get('node_id') in relevant_ids:
+                node_text = self.get_node_text(node)
+                retrieved_contexts.append({
+                    'node_id': node.get('node_id'),
+                    'title': node.get('title'),
+                    'pages': f"{node.get('start_index')}-{node.get('end_index')}",
+                    'text': node_text[:3000]  # Limit text length
+                })
+        
+        return retrieved_contexts, reasoning
+
+# Initialize retriever
+print("\nInitializing PageIndex Retriever...")
+retriever = PageIndexRetriever(structure, pdf_path)
+print(f"✓ Loaded {len(retriever.flatten_tree())} nodes from tree")
+
+# Test queries
+test_queries = [
+    "What are the main responsibilities of this role?",
+    "What qualifications are required?",
+    "What technical skills are mentioned?"
+]
+
+for query in test_queries:
+    print("\n" + "-" * 60)
+    print(f"Query: {query}")
+    print("-" * 60)
+    
+    contexts, reasoning = retriever.tree_search(query)
+    
+    print(f"\nRetrieved {len(contexts)} relevant sections:")
+    for ctx in contexts:
+        print(f"  [{ctx['node_id']}] {ctx['title']} (pages {ctx['pages']})")
+
+# Step 6: Generation - RAG with PageIndex
+print("\n" + "=" * 60)
+print("Step 6: Generation - RAG with PageIndex")
+print("=" * 60)
+
+def generate_answer(query, retriever, model='gpt-4o-mini'):
+    """
+    Full RAG pipeline: retrieve relevant sections, then generate answer
+    """
+    from pageindex.utils import ChatGPT_API
+    
+    # Retrieve
+    contexts, reasoning = retriever.tree_search(query, model)
+    
+    if not contexts:
+        return "No relevant information found in the document."
+    
+    # Build context string
+    context_parts = []
+    for i, ctx in enumerate(contexts, 1):
+        context_parts.append(f"""Source {i}: [{ctx['node_id']}] {ctx['title']} (pages {ctx['pages']})
+{ctx['text']}
+""")
+    
+    full_context = "\n---\n".join(context_parts)
+    
+    # Generate answer
+    prompt = f"""You are a helpful assistant answering questions about a job description.
+Use the provided context to answer the user's question accurately.
+If the context doesn't contain enough information, say so.
+
+Context:
+{full_context}
+
+User Question: {query}
+
+Instructions:
+1. Answer based ONLY on the provided context
+2. Cite the source sections (e.g., "According to [0001]...")
+3. Be concise but complete
+4. If information is missing, acknowledge it
+
+Answer:"""
+    
+    answer = ChatGPT_API(model=model, prompt=prompt)
+    return answer, contexts
+
+# Test generation with one query
+print("\nTesting full RAG pipeline...")
+test_query = "What are the key responsibilities of the Vice President, AI Data Scientist role?"
+print(f"\nQuery: {test_query}")
+
+answer, sources = generate_answer(test_query, retriever)
+
+print("\n" + "-" * 60)
+print("Generated Answer:")
+print("-" * 60)
+print(answer)
+
+print("\n" + "-" * 60)
+print("Sources Used:")
+print("-" * 60)
+for src in sources:
+    print(f"  [{src['node_id']}] {src['title']} - pages {src['pages']}")
+
+# Cleanup
+retriever.doc.close()
+
+print("\n" + "=" * 60)
+print("PageIndex RAG Exploration Complete!")
+print("=" * 60)
+print("\nKey Takeaways:")
+print("1. PageIndex builds a hierarchical tree structure from PDFs")
+print("2. Retrieval uses LLM reasoning to navigate the tree (not vectors)")
+print("3. Generation uses retrieved sections as context for RAG")
+print("4. All page references are traceable and explainable")
