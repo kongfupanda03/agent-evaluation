@@ -5,6 +5,8 @@ Loads API key from outside the repo for security
 import os
 import sys
 import json
+import time
+import asyncio
 
 # Add PageIndex to path
 sys.path.insert(0, '/Users/xiongyuyu/Documents/projects/agent-eval/agent-evaluation/PageIndex')
@@ -16,11 +18,80 @@ load_dotenv('/Users/xiongyuyu/Documents/projects/agent-eval/.env')
 # Set the key that PageIndex expects
 os.environ['CHATGPT_API_KEY'] = os.getenv('OPENAI_API_KEY')
 
+# ============ CUSTOM LLM IMPLEMENTATION ============
+# Option 1: Monkey-patch to use your own LLM
+# Replace these functions with your custom LLM calls
+
+def custom_llm_call(model, prompt, temperature=0):
+    """
+    Custom LLM implementation - replace with your own
+    Examples: local LLM (Ollama, vLLM), Azure OpenAI, Anthropic, etc.
+    """
+    # Example using OpenAI-compatible API (default)
+    import openai
+    client = openai.OpenAI(
+        api_key=os.getenv('OPENAI_API_KEY'),
+        # base_url="http://localhost:11434/v1"  # For Ollama
+        # base_url="https://your-custom-endpoint.com/v1"  # For custom endpoint
+    )
+    
+    response = client.chat.completions.create(
+        model=model,
+        messages=[{"role": "user", "content": prompt}],
+        temperature=temperature,
+    )
+    return response.choices[0].message.content
+
+async def custom_llm_call_async(model, prompt, temperature=0):
+    """Async version of custom LLM call"""
+    import openai
+    async with openai.AsyncOpenAI(api_key=os.getenv('OPENAI_API_KEY')) as client:
+        response = await client.chat.completions.create(
+            model=model,
+            messages=[{"role": "user", "content": prompt}],
+            temperature=temperature,
+        )
+        return response.choices[0].message.content
+
+# Monkey-patch PageIndex to use custom LLM
+import pageindex.utils as utils
+
+def custom_chatgpt_api(model, prompt, api_key=None, chat_history=None):
+    """Wrapper that calls custom LLM instead of OpenAI"""
+    max_retries = 3
+    for i in range(max_retries):
+        try:
+            return custom_llm_call(model, prompt, temperature=0)
+        except Exception as e:
+            print(f'************* Retrying ({i+1}/{max_retries}) *************')
+            if i < max_retries - 1:
+                time.sleep(1)
+            else:
+                return "Error"
+
+async def custom_chatgpt_api_async(model, prompt, api_key=None):
+    """Async wrapper for custom LLM"""
+    max_retries = 3
+    for i in range(max_retries):
+        try:
+            return await custom_llm_call_async(model, prompt, temperature=0)
+        except Exception as e:
+            print(f'************* Retrying ({i+1}/{max_retries}) *************')
+            if i < max_retries - 1:
+                await asyncio.sleep(1)
+            else:
+                return "Error"
+
+# Apply monkey patches
+utils.ChatGPT_API = custom_chatgpt_api
+utils.ChatGPT_API_async = custom_chatgpt_api_async
+
 print("=" * 60)
 print("PageIndex Exploration")
 print("=" * 60)
-print(f"\nAPI Key loaded: {os.environ['CHATGPT_API_KEY'][:20]}...")
-print(f"API Key length: {len(os.environ['CHATGPT_API_KEY'])} characters")
+print(f"\nAPI Key loaded: {os.getenv('OPENAI_API_KEY')[:20]}...")
+print(f"API Key length: {len(os.getenv('OPENAI_API_KEY'))} characters")
+print("✓ Custom LLM implementation patched")
 
 # Step 1: Import and explore PageIndex modules
 print("\n" + "=" * 60)
