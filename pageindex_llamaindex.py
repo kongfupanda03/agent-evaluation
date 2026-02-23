@@ -32,27 +32,16 @@ except ImportError:
     print("LlamaIndex not installed. Run: pip install llama-index")
 
 
-class PageIndexLlamaRetriever(BaseRetriever):
-    """
-    LlamaIndex retriever that uses PageIndex tree for reasoning-based retrieval.
-    """
-    
-    def __init__(self, pageindex_structure: list, pdf_path: str, llm_model: str = 'gpt-4o-mini'):
-        """
-        Args:
-            pageindex_structure: The tree structure from page_index_main()
-            pdf_path: Path to the original PDF
-            llm_model: LLM model for reasoning
-        """
-        self.structure = pageindex_structure
+class PageIndexDocument:
+    """Holds PageIndex tree and PDF for a single document"""
+    def __init__(self, doc_id: str, structure: list, pdf_path: str):
+        self.doc_id = doc_id
+        self.structure = structure
         self.pdf_path = pdf_path
-        self.llm_model = llm_model
         self.doc = fitz.open(pdf_path)
-        self.all_nodes = self._flatten_tree(pageindex_structure)
-        super().__init__()
+        self.all_nodes = self._flatten_tree(structure)
     
     def _flatten_tree(self, nodes):
-        """Flatten tree to list of all nodes"""
         result = []
         for node in nodes:
             result.append(node)
@@ -60,57 +49,84 @@ class PageIndexLlamaRetriever(BaseRetriever):
                 result.extend(self._flatten_tree(node['nodes']))
         return result
     
-    def _get_page_text(self, page_num: int) -> str:
-        """Get text from a specific page (1-indexed)"""
-        if 1 <= page_num <= len(self.doc):
-            return self.doc[page_num - 1].get_text()
-        return ""
+    def close(self):
+        self.doc.close()
+
+
+class PageIndexLlamaRetriever(BaseRetriever):
+    """
+    LlamaIndex retriever that uses PageIndex tree for reasoning-based retrieval.
+    Supports multiple documents.
+    """
     
-    def _get_node_text(self, node: dict) -> str:
-        """Get full text for a node (all pages in its range)"""
+    def __init__(self, documents: List[PageIndexDocument], llm_model: str = 'gpt-4o-mini'):
+        """
+        Args:
+            documents: List of PageIndexDocument objects
+            llm_model: LLM model for reasoning
+        """
+        self.documents = documents
+        self.llm_model = llm_model
+        super().__init__()
+    
+    def _get_all_nodes(self):
+        """Get all nodes from all documents with doc_id prefix"""
+        all_nodes = []
+        for doc in self.documents:
+            for node in doc.all_nodes:
+                # Add doc_id to node_id for uniqueness
+                node_copy = node.copy()
+                node_copy['doc_id'] = doc.doc_id
+                node_copy['unique_id'] = f"{doc.doc_id}:{node.get('node_id', 'N/A')}"
+                all_nodes.append((doc, node_copy))
+        return all_nodes
+    
+    def _get_node_text(self, doc: PageIndexDocument, node: dict) -> str:
+        """Get full text for a node from a specific document"""
         start = node.get('start_index', 1)
         end = node.get('end_index', start)
         texts = []
         for page_num in range(start, end + 1):
-            texts.append(self._get_page_text(page_num))
+            if 1 <= page_num <= len(doc.doc):
+                texts.append(doc.doc[page_num - 1].get_text())
         return "\n".join(texts)
     
     def _retrieve(self, query_bundle: QueryBundle) -> List[NodeWithScore]:
         """
-        Retrieve relevant nodes using PageIndex tree reasoning.
-        This is the core method called by LlamaIndex.
+        Retrieve relevant nodes using PageIndex tree reasoning across all documents.
         """
         query = query_bundle.query_str
+        all_nodes = self._get_all_nodes()
         
-        # Build tree context for reasoning
+        # Build tree context for all documents
         tree_context = []
-        for node in self.all_nodes:
-            node_id = node.get('node_id', 'N/A')
+        for doc, node in all_nodes:
+            unique_id = node.get('unique_id')
             title = node.get('title', '')
             summary = node.get('summary', '')
             start = node.get('start_index', '')
             end = node.get('end_index', '')
-            tree_context.append(f"[{node_id}] {title} (pages {start}-{end}): {summary}")
+            tree_context.append(f"[{unique_id}] {title} (pages {start}-{end}): {summary}")
         
         # Use LLM to reason which nodes are relevant
-        prompt = f"""You are given a document's table of contents and a user query.
-Your task is to identify which sections (by node_id) are most relevant to answer the query.
+        prompt = f"""You are given multiple document tables of contents and a user query.
+Your task is to identify which sections (by unique_id) are most relevant to answer the query.
 
-Document Structure:
+Documents Structure:
 {chr(10).join(tree_context)}
 
 User Query: {query}
 
 Instructions:
-1. Analyze which sections would contain information relevant to the query
-2. Consider both the section titles and summaries
-3. Return the node_ids of the most relevant sections (up to 3)
-4. If no sections seem relevant, return an empty list
+1. Analyze which sections from which documents are relevant
+2. Consider both section titles and summaries
+3. Return the unique_ids of most relevant sections (up to 5 across all docs)
+4. Format: "doc_id:node_id" (e.g., "doc1:0001", "doc2:0003")
 
 Response format (JSON):
 {{
     "reasoning": "Explain your thinking",
-    "relevant_node_ids": ["0001", "0003"],
+    "relevant_unique_ids": ["doc1:0001", "doc2:0003"],
     "confidence": "high/medium/low"
 }}
 
@@ -119,18 +135,18 @@ Return only the JSON."""
         response = ChatGPT_API(model=self.llm_model, prompt=prompt)
         result = extract_json(response)
         
-        relevant_ids = result.get('relevant_node_ids', [])
+        relevant_ids = result.get('relevant_unique_ids', [])
         
         # Create LlamaIndex nodes from relevant PageIndex nodes
         retrieved_nodes = []
-        for node in self.all_nodes:
-            if node.get('node_id') in relevant_ids:
-                node_text = self._get_node_text(node)
+        for doc, node in all_nodes:
+            if node.get('unique_id') in relevant_ids:
+                node_text = self._get_node_text(doc, node)
                 
-                # Create LlamaIndex TextNode
                 llama_node = TextNode(
                     text=node_text,
                     metadata={
+                        'doc_id': node.get('doc_id'),
                         'node_id': node.get('node_id'),
                         'title': node.get('title'),
                         'page_range': f"{node.get('start_index')}-{node.get('end_index')}",
@@ -138,9 +154,8 @@ Return only the JSON."""
                     }
                 )
                 
-                # Score based on position in relevant_ids (higher = more relevant)
                 try:
-                    score = 1.0 - (relevant_ids.index(node.get('node_id')) * 0.1)
+                    score = 1.0 - (relevant_ids.index(node.get('unique_id')) * 0.1)
                 except ValueError:
                     score = 0.5
                 
@@ -149,24 +164,36 @@ Return only the JSON."""
         return retrieved_nodes
     
     def close(self):
-        """Close the PDF document"""
-        self.doc.close()
+        """Close all PDF documents"""
+        for doc in self.documents:
+            doc.close()
 
 
 def main():
-    """Main execution flow"""
+    """Main execution flow with multiple PDFs"""
     print("=" * 60)
-    print("PageIndex + LlamaIndex Integration")
+    print("PageIndex + LlamaIndex (Multi-Document)")
     print("=" * 60)
     
-    pdf_path = "/Users/xiongyuyu/Documents/projects/agent-eval/agent-evaluation/pdf/JD - Vice President, AI Data Scientist (Singapore).pdf"
+    # Define PDFs to process
+    pdf_files = [
+        ("jd1", "/Users/xiongyuyu/Documents/projects/agent-eval/agent-evaluation/pdf/JD - Vice President, AI Data Scientist (Singapore).pdf"),
+        # Add more PDFs here:
+        # ("doc2", "/path/to/another.pdf"),
+        # ("doc3", "/path/to/third.pdf"),
+    ]
     
-    if not os.path.exists(pdf_path):
-        print(f"PDF not found: {pdf_path}")
+    # Filter existing files
+    pdf_files = [(doc_id, path) for doc_id, path in pdf_files if os.path.exists(path)]
+    
+    if not pdf_files:
+        print("No PDF files found!")
         return
     
-    # Step 1: Build PageIndex tree
-    print("\nStep 1: Building PageIndex tree...")
+    print(f"\nProcessing {len(pdf_files)} PDF(s)...")
+    
+    # Step 1: Build PageIndex trees for all documents
+    print("\nStep 1: Building PageIndex trees...")
     config_loader = ConfigLoader()
     opt = config_loader.load({
         'model': 'gpt-4o-mini',
@@ -174,52 +201,53 @@ def main():
         'if_add_node_summary': 'yes',
     })
     
-    result = page_index_main(pdf_path, opt)
-    structure = result.get('structure', [])
-    print(f"✓ Built tree with {len(structure)} top-level sections")
+    documents = []
+    for doc_id, pdf_path in pdf_files:
+        print(f"  Processing {doc_id}...")
+        result = page_index_main(pdf_path, opt)
+        structure = result.get('structure', [])
+        
+        doc = PageIndexDocument(doc_id, structure, pdf_path)
+        documents.append(doc)
+        print(f"    ✓ {len(structure)} top-level sections, {len(doc.all_nodes)} total nodes")
     
-    # Step 2: Create LlamaIndex retriever
-    print("\nStep 2: Creating LlamaIndex retriever...")
-    retriever = PageIndexLlamaRetriever(structure, pdf_path)
-    print(f"✓ Loaded {len(retriever.all_nodes)} nodes")
+    # Step 2: Create multi-document retriever
+    print("\nStep 2: Creating multi-document retriever...")
+    retriever = PageIndexLlamaRetriever(documents)
+    total_nodes = sum(len(d.all_nodes) for d in documents)
+    print(f"✓ Loaded {total_nodes} nodes from {len(documents)} documents")
     
-    # Step 3: Use with LlamaIndex (if available)
+    # Step 3: Query across all documents
+    print("\nStep 3: Testing retrieval...")
+    
     if LLAMAINDEX_AVAILABLE:
-        print("\nStep 3: Testing with LlamaIndex...")
-        
-        # Set up LlamaIndex with OpenAI
-        Settings.llm = OpenAI(model="gpt-4o-mini", temperature=0)
-        
-        # Create index with our custom retriever
-        # Note: We create empty documents since our retriever handles everything
-        dummy_doc = Document(text="PageIndex document")
-        index = VectorStoreIndex.from_documents([dummy_doc])
-        
-        # Replace default retriever with our PageIndex retriever
-        query_engine = index.as_query_engine(retriever=retriever)
-        
-        # Test query
-        query = "What are the key responsibilities of this role?"
-        print(f"\nQuery: {query}")
-        response = query_engine.query(query)
-        
-        print(f"\nAnswer: {response}")
-        print(f"\nSources: {response.source_nodes}")
-    else:
-        print("\nStep 3: Testing standalone retrieval...")
-        query = "What are the key responsibilities of this role?"
-        print(f"\nQuery: {query}")
-        
         from llama_index.core.schema import QueryBundle
-        nodes = retriever._retrieve(QueryBundle(query_str=query))
         
-        print(f"\nRetrieved {len(nodes)} nodes:")
-        for node_with_score in nodes:
-            node = node_with_score.node
-            print(f"  [{node.metadata['node_id']}] {node.metadata['title']} (score: {node_with_score.score:.2f})")
+        queries = [
+            "What are the key responsibilities?",
+            "What qualifications are required?",
+            "What technical skills are mentioned?"
+        ]
+        
+        for query in queries:
+            print(f"\n{'-'*60}")
+            print(f"Query: {query}")
+            print('-'*60)
+            
+            nodes = retriever._retrieve(QueryBundle(query_str=query))
+            
+            print(f"Retrieved {len(nodes)} nodes:")
+            for node_with_score in nodes:
+                node = node_with_score.node
+                doc_id = node.metadata['doc_id']
+                title = node.metadata['title']
+                print(f"  [{doc_id}:{node.metadata['node_id']}] {title} (score: {node_with_score.score:.2f})")
+    else:
+        print("LlamaIndex not available. Install with: pip install llama-index")
     
     retriever.close()
-    print("\n✓ Done!")
+    print("\n" + "="*60)
+    print("✓ Done!")
 
 
 if __name__ == "__main__":
