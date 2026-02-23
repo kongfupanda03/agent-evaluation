@@ -6,6 +6,9 @@ import os
 import sys
 import json
 
+# Add PageIndex to path
+sys.path.insert(0, '/Users/xiongyuyu/Documents/projects/agent-eval/agent-evaluation/PageIndex')
+
 # Load API key from outside the repo (parent directory)
 from dotenv import load_dotenv
 load_dotenv('/Users/xiongyuyu/Documents/projects/agent-eval/.env')
@@ -25,28 +28,9 @@ print("Step 1: Importing PageIndex modules")
 print("=" * 60)
 
 try:
-    # Import directly from local PageIndex repo
-    import importlib.util
-    pageindex_path = '/Users/xiongyuyu/Documents/projects/agent-eval/agent-evaluation/PageIndex/pageindex/page_index.py'
-    utils_path = '/Users/xiongyuyu/Documents/projects/agent-eval/agent-evaluation/PageIndex/pageindex/utils.py'
-    
-    # Load utils module first (has ConfigLoader)
-    spec_utils = importlib.util.spec_from_file_location("pageindex_utils", utils_path)
-    utils_module = importlib.util.module_from_spec(spec_utils)
-    sys.modules["pageindex_utils"] = utils_module
-    spec_utils.loader.exec_module(utils_module)
-    ConfigLoader = utils_module.ConfigLoader
-    ChatGPT_API = utils_module.ChatGPT_API
-    extract_json = utils_module.extract_json
-    
-    # Load page_index module
-    spec = importlib.util.spec_from_file_location("pageindex_main", pageindex_path)
-    pageindex_module = importlib.util.module_from_spec(spec)
-    sys.modules["pageindex_main"] = pageindex_module
-    spec.loader.exec_module(pageindex_module)
-    page_index_main = pageindex_module.page_index_main
-    
-    print("✓ Successfully imported PageIndex modules (local)")
+    from pageindex import page_index_main
+    from pageindex.utils import ConfigLoader, ChatGPT_API, extract_json
+    print("✓ Successfully imported PageIndex modules")
 except Exception as e:
     print(f"✗ Import error: {e}")
     import traceback
