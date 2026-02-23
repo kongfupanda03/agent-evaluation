@@ -83,8 +83,23 @@ async def custom_chatgpt_api_async(model, prompt, api_key=None):
                 return "Error"
 
 # Apply monkey patches
+def custom_chatgpt_api_with_finish_reason(model, prompt, api_key=None, chat_history=None):
+    """Wrapper that calls custom LLM and returns (content, finish_reason)"""
+    max_retries = 3
+    for i in range(max_retries):
+        try:
+            result = custom_llm_call(model, prompt, temperature=0)
+            return result, "finished"
+        except Exception as e:
+            print(f'************* Retrying ({i+1}/{max_retries}) *************')
+            if i < max_retries - 1:
+                time.sleep(1)
+            else:
+                return "Error", "error"
+
 utils.ChatGPT_API = custom_chatgpt_api
 utils.ChatGPT_API_async = custom_chatgpt_api_async
+utils.ChatGPT_API_with_finish_reason = custom_chatgpt_api_with_finish_reason
 
 print("=" * 60)
 print("PageIndex Exploration")
@@ -100,7 +115,8 @@ print("=" * 60)
 
 try:
     from pageindex import page_index_main
-    from pageindex.utils import ConfigLoader, ChatGPT_API, extract_json
+    from pageindex.utils import ConfigLoader, extract_json
+    # Note: ChatGPT_API is already monkey-patched above, don't reimport
     print("✓ Successfully imported PageIndex modules")
 except Exception as e:
     print(f"✗ Import error: {e}")
@@ -301,7 +317,7 @@ Response format (JSON):
 
 Return only the JSON, no other text."""
         
-        response = ChatGPT_API(model=model, prompt=prompt)
+        response = utils.ChatGPT_API(model=model, prompt=prompt)
         result = extract_json(response)
         
         relevant_ids = result.get('relevant_node_ids', [])
@@ -390,7 +406,7 @@ Instructions:
 
 Answer:"""
     
-    answer = ChatGPT_API(model=model, prompt=prompt)
+    answer = utils.ChatGPT_API(model=model, prompt=prompt)
     return answer, contexts
 
 # Test generation with one query
