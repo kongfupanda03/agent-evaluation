@@ -1,11 +1,33 @@
-⠋ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ ✨ You're running DeepEval's latest Answer Relevancy Metric! (using esg-gpt4o, strict=False, async_mode=True)...WARNING:urllib3.connectionpool:Retrying (Retry(total=0, connect=0, read=2, redirect=None, status=None)) after connection broken by 'NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x0000011596343410>: Failed to resolve 'us.i.posthog.com' ([Errno 11001] getaddrinfo failed)")': /batch/
-INFO:backoff:Backing off send_request(...) for 1.9s (requests.exceptions.ConnectionError: HTTPSConnectionPool(host='us.i.posthog.com', port=443): Max retries exceeded with url: /batch/ (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x0000011596389160>: Failed to resolve 'us.i.posthog.com' ([Errno 11001] getaddrinfo failed)")))
-⠸ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ ✨ You're running DeepEval's latest Answer Relevancy Metric! (using esg-gpt4o, strict=False, async_mode=True)...WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=1, read=2, redirect=None, status=None)) after connection broken by 'NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000115963AA300>: Failed to resolve 'us.i.posthog.com' ([Errno 11001] getaddrinfo failed)")': /batch/
-WARNING:urllib3.connectionpool:Retrying (Retry(total=0, connect=0, read=2, redirect=None, status=None)) after connection broken by 'NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000115963A82F0>: Failed to resolve 'us.i.posthog.com' ([Errno 11001] getaddrinfo failed)")': /batch/
-ERROR:backoff:Giving up send_request(...) after 4 tries (requests.exceptions.ConnectionError: HTTPSConnectionPool(host='us.i.posthog.com', port=443): Max retries exceeded with url: /batch/ (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000115963A9DC0>: Failed to resolve 'us.i.posthog.com' ([Errno 11001] getaddrinfo failed)")))
+2026-02-24 15:44:02.099 | INFO     | __main__:<module>:3 - processing pdf file - CDP 2023.pdf
+Parsing PDF...
+start find_toc_pages
+no toc found
+process_no_toc
+start_index: 1
+start generate_toc_init
+Document validation: 72 pages, max allowed index: 72
+start verify_toc
+check all items
+accuracy: 0.00%
 Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-  File "<stdin>", line 20, in evaluate
-TypeError: FaithfulnessResult() takes no arguments
->>> [Confident AI Metric Data Log] Error posting metric data (0 metrics remaining in queue, 1 in flight): Cannot connect to host api.confident-ai.com:443 ssl:default  
-To disable dev logging, set CONFIDENT_METRIC_LOGGING_VERBOSE=0 as an environment variable.
+  File "<stdin>", line 5, in <module>
+  File "<stdin>", line 3, in build_tree
+  File "C:\Users\2019364\OneDrive - Standard Chartered Bank\Documents\AI\others\51785-frontline-assistant-backend\agents\pageindex\PageIndex\pageindex\page_index.py", line 1100, in page_index_main
+    return asyncio.run(page_index_builder())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\2019364\goldenversions\Anaconda3\envs\llm\Lib\asyncio\runners.py", line 195, in run
+    return runner.run(main)
+  File "C:\Users\2019364\goldenversions\Anaconda3\envs\llm\Lib\asyncio\runners.py", line 118, in run
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\2019364\goldenversions\Anaconda3\envs\llm\Lib\asyncio\base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\2019364\OneDrive - Standard Chartered Bank\Documents\AI\others\51785-frontline-assistant-backend\agents\pageindex\PageIndex\pageindex\page_index.py", line 1075, in page_index_builder
+    structure = await tree_parser(page_list, opt, doc=doc, logger=logger)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\2019364\OneDrive - Standard Chartered Bank\Documents\AI\others\51785-frontline-assistant-backend\agents\pageindex\PageIndex\pageindex\page_index.py", line 1035, in tree_parser
+    toc_with_page_number = await meta_processor(
+                           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\2019364\OneDrive - Standard Chartered Bank\Documents\AI\others\51785-frontline-assistant-backend\agents\pageindex\PageIndex\pageindex\page_index.py", line 989, in meta_processor
+    raise Exception('Processing failed')
+Exception: Processing failed
