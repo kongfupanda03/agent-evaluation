@@ -217,11 +217,34 @@ def main():
     total_nodes = sum(len(d.all_nodes) for d in documents)
     print(f"✓ Loaded {total_nodes} nodes from {len(documents)} documents")
     
-    # Step 3: Query across all documents
-    print("\nStep 3: Testing retrieval...")
+    # Step 3: Query across all documents with custom answer generation
+    print("\nStep 3: Testing retrieval and answer generation...")
     
     if LLAMAINDEX_AVAILABLE:
         from llama_index.core.schema import QueryBundle
+        
+        # Set up LlamaIndex LLM
+        llm = OpenAI(model="gpt-4o-mini", temperature=0)
+        
+        def generate_answer(query: str, context_str: str, llm) -> str:
+            """Custom answer generation with query and context string"""
+            prompt = f"""You are a helpful assistant answering questions based on provided document context.
+
+Context:
+{context_str}
+
+User Question: {query}
+
+Instructions:
+1. Answer based ONLY on the provided context
+2. Be concise but complete
+3. If information is missing, say "I don't have enough information to answer this"
+4. Cite document sources when possible (e.g., "According to [doc_id:node_id]...")
+
+Answer:"""
+            
+            response = llm.complete(prompt)
+            return response.text
         
         queries = [
             "What are the key responsibilities?",
@@ -230,18 +253,42 @@ def main():
         ]
         
         for query in queries:
-            print(f"\n{'-'*60}")
+            print(f"\n{'='*60}")
             print(f"Query: {query}")
-            print('-'*60)
+            print('='*60)
             
+            # Step 1: Retrieve relevant nodes
+            print("\n[Retrieval]")
             nodes = retriever._retrieve(QueryBundle(query_str=query))
-            
             print(f"Retrieved {len(nodes)} nodes:")
             for node_with_score in nodes:
                 node = node_with_score.node
                 doc_id = node.metadata['doc_id']
                 title = node.metadata['title']
                 print(f"  [{doc_id}:{node.metadata['node_id']}] {title} (score: {node_with_score.score:.2f})")
+            
+            # Step 2: Build context string from retrieved nodes
+            print("\n[Context Building]")
+            context_parts = []
+            for i, node_with_score in enumerate(nodes, 1):
+                node = node_with_score.node
+                meta = node.metadata
+                context_parts.append(f"""Source {i}: [{meta['doc_id']}:{meta['node_id']}] {meta['title']} (pages {meta['page_range']})
+{node.text[:2000]}
+""")
+            
+            context_str = "\n---\n".join(context_parts)
+            print(f"Context length: {len(context_str)} characters")
+            
+            # Step 3: Generate answer with custom prompt
+            print("\n[Answer Generation]")
+            answer = generate_answer(query, context_str, llm)
+            
+            print(f"Answer: {answer}")
+            print(f"\nSources used: {len(nodes)}")
+            for i, node_with_score in enumerate(nodes, 1):
+                meta = node_with_score.node.metadata
+                print(f"  {i}. [{meta['doc_id']}:{meta['node_id']}] {meta['title']}")
     else:
         print("LlamaIndex not available. Install with: pip install llama-index")
     
