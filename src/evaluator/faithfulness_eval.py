@@ -17,12 +17,23 @@ from typing import Dict, Any, List, Optional
 from dataclasses import dataclass
 
 from deepeval import evaluate
-from deepeval.metrics import FaithfulnessMetric
+from deepeval.metrics import FaithfulnessMetric, GEval
 from deepeval.test_case import LLMTestCase
 from deepeval.models.base_model import DeepEvalBaseLLM
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
 load_dotenv()
+
+# GEval metric for MCQ correctness evaluation
+correctness_metric = GEval(
+    name="MCQ Correctness",
+    criteria="""
+Check whether the selected option in actual_output
+matches the expected_output exactly.
+Focus on the final answer choice (A/B/C/D/E).
+""",
+    evaluation_params=["actual_output", "expected_output"],
+)
 
 
 
