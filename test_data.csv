@@ -1,0 +1,651 @@
+query,expected_tools,expected_sub_queries_rag,expected_sub_queries_nl2sql,description
+"What is Client's current loan exposure?",nl2sql_tool,,"What is the current loan exposure for Client?",Single intent - structured financial data
+"What are Client's ESG commitments?",rag_tool,"Find Client's ESG commitments and sustainability goals from reports",,Single intent - document-based ESG info
+"What is Client's revenue YTD and their sustainability report?","rag_tool,nl2sql_tool","Find Client's sustainability report and ESG commitments","What is Client's year-to-date revenue?",Multi-intent: financial data + ESG documents
+"Summarize the last 5 call reports for Client",nl2sql_tool,,"Summarize the last 5 call reports for Client including key discussions and action items.",Single intent - call report summary from SQL
+"What is Client's total assets and contingent liabilities?",nl2sql_tool,,"What are Client's total assets and contingent liabilities?",Single intent - multiple related financial metrics
+"Find the board of directors for Client from their annual report",rag_tool,"Find the board of directors and senior management team for Client",,Single intent - governance info from documents
+"How many deals did Client have in 2024? Split by product type and include total deal value",nl2sql_tool,,"Provide the deal count and total deal value for Client in 2024, split by product type.",Multi-metric aggregation - same dataset
+"What was discussed in the last meeting with Client?",nl2sql_tool,,"What was discussed in the last meeting with Client including key points and action items?",Single intent - meeting notes from SQL
+"Get Client's credit rating and risk assessment",rag_tool,"Find Client's credit rating and risk assessment documents",,Single intent - credit info from documents
+"Compare Client's wallet share with competitors",nl2sql_tool,,"What is Client's wallet share compared to competitors in the coalition?",Single intent - wallet share analysis
+"What are the approval conditions for Deal 12345?",rag_tool,"Find the approval conditions and requirements for Deal 12345",,Single intent - deal conditions from documents
+"List all deals in the pipeline for Client with expected revenue",nl2sql_tool,,"List all deals in the pipeline for Client with expected revenue and deal status",Single intent - deal pipeline from SQL
+"What is Client's exposure across all products and their ESG score?","rag_tool,nl2sql_tool","Find Client's ESG score and sustainability performance","What is Client's total exposure across all products?",Multi-intent: exposure + ESG
+"Find the transaction history for Deal HIJ789",rag_tool,"Find the transaction history and progress for Deal HIJ789",,Single intent - deal history from documents
+"What are Client's payments due this quarter?",nl2sql_tool,,"What are Client's payment obligations due this quarter?",Single intent - payment data from SQL
+"Summarize Client's annual report highlights",rag_tool,"Summarize the key highlights from Client's annual report",,Single intent - annual report summary
+"How has Client's revenue trended over the last 12 months?",nl2sql_tool,,"What is the monthly revenue trend for Client over the last 12 months?",Single intent - revenue trend analysis
+"What risks are identified in Client's credit assessment?",rag_tool,"Find the risk analysis and identified risks from Client's credit assessment",,Single intent - risk analysis from documents
+"Get Client's account information and recent call notes","rag_tool,nl2sql_tool","Find recent call notes and meeting summaries for Client","What is Client's current account information?",Multi-intent: account info + call notes
+"What is the deal structure for Project Alpha?",rag_tool,"Find the deal structure documentation for Project Alpha",,Single intent - deal structure from documents
+"List top 10 clients by revenue MTD",nl2sql_tool,,"List the top 10 clients by month-to-date revenue",Single intent - ranking query
+"What are Client's regulatory filings from last year?",rag_tool,"Find Client's regulatory filings and public announcements from last year",,Single intent - regulatory filings
+"How many meetings were held with Client in Q1?",nl2sql_tool,,"Count the number of meetings held with Client in Q1",Single intent - meeting count
+"What is Client's RWA and income metrics?",nl2sql_tool,,"What are Client's risk-weighted assets and income metrics?",Single intent - RWA and income
+"Find the sustainability commitments for Client",rag_tool,"Find Client's sustainability commitments and ESG goals from reports",,Single intent - sustainability commitments
+"What deals are pending approval for Client?",nl2sql_tool,,"List all deals pending approval for Client with deal values",Single intent - pending deals
+"Get Client's historical financial disclosures",rag_tool,"Find Client's historical financial disclosures and annual reports",,Single intent - historical financials
+"What is Client's contingent exposure?",nl2sql_tool,,"What is Client's total contingent exposure?",Single intent - contingent exposure
+"Summarize the credit assessment for Client",rag_tool,"Summarize the credit assessment and rating for Client",,Single intent - credit assessment summary
+"How many banks were involved in Deal XYZ123?",nl2sql_tool,,"How many banks were involved in Deal XYZ123 and what was SCB's role?",Single intent - deal participation
+"What are the key terms of Client's loan facility?",rag_tool,"Find the key terms and conditions of Client's loan facility",,Single intent - loan terms from documents
+"List clients with exposure above $100M",nl2sql_tool,,"List all clients with total exposure above 100 million USD",Single intent - threshold-based query
+"What is Client's domicile country and segment?",nl2sql_tool,,"What is Client's domicile country and business segment?",Single intent - client demographics
+"Find approval status for all deals with Client",rag_tool,"Find the approval status tracking for all deals with Client",,Single intent - approval status
+"What products contribute most to Client's revenue?",nl2sql_tool,,"Which products contribute the most revenue for Client?",Single intent - product revenue analysis
+"Get Client's governance information",rag_tool,"Find Client's corporate governance information and board details",,Single intent - governance info
+"What is the expected close date for Deal 99999?",nl2sql_tool,,"What is the expected close date and status for Deal 99999?",Single intent - deal timeline
+"Summarize Client's ESG performance vs peers",rag_tool,"Summarize Client's ESG performance compared to industry peers",,Single intent - ESG comparison
+"What is Client's total deal size in the pipeline?",nl2sql_tool,,"What is the total deal size for Client in the current pipeline?",Single intent - pipeline value
+"Find risk analysis documents for Client",rag_tool,"Find the risk analysis documents for Client",,Single intent - risk documents
+"List all call reports from last month",nl2sql_tool,,"List all call reports from last month with client names and meeting dates",Single intent - call report listing
+"What is Client's wallet penetration rate?",nl2sql_tool,,"What is Client's wallet penetration rate and coalition wallet revenue?",Single intent - wallet metrics
+"Get Client's deal structure and approval conditions","rag_tool,nl2sql_tool","Find Client's deal structure and approval conditions","What is Client's deal value and SCB role?",Multi-intent: deal structure + deal value
+"What are the top 5 products by revenue for Client?",nl2sql_tool,,"What are the top 5 products by revenue for Client?",Single intent - top products
+"Find Client's strategic disclosures from annual report",rag_tool,"Find Client's strategic disclosures and business overview from annual report",,Single intent - strategic disclosures
+"What is Client's liability position?",nl2sql_tool,,"What is Client's total liability position?",Single intent - liability query
+"Summarize the rating agency evaluation for Client",rag_tool,"Summarize the rating agency evaluation for Client",,Single intent - rating summary
+"How many deals has Client closed this year?",nl2sql_tool,,"How many deals has Client closed this year with total value?",Single intent - deal count with value
+"What are Client's sustainability goals?",rag_tool,"Find Client's sustainability goals and ESG commitments",,Single intent - sustainability goals
+"Get Client's meeting attendees from last call",nl2sql_tool,,"Who were the attendees in the last call with Client?",Single intent - meeting attendees
+"What is Client's market share in their sector?",nl2sql_tool,,"What is Client's market share and wallet share in their sector?",Single intent - market share
+"Find the transaction progress for Deal ABC456",rag_tool,"Find the transaction progress and history for Deal ABC456",,Single intent - transaction progress
+"List clients with declining revenue trend",nl2sql_tool,,"List clients with declining revenue trend over the last 6 months",Single intent - trend analysis
+"What are the key discussion points from Client's last meeting?",nl2sql_tool,,"What were the key discussion points from Client's last meeting?",Single intent - meeting content
+"Get Client's credit performance history",rag_tool,"Find Client's historical credit performance and ratings",,Single intent - credit history
+"What is Client's expected revenue from pending deals?",nl2sql_tool,,"What is Client's total expected revenue from all pending deals?",Single intent - expected revenue
+"Find Client's public announcements from Q2",rag_tool,"Find Client's public announcements and regulatory filings from Q2",,Single intent - public announcements
+"How does Client's revenue compare to last year?",nl2sql_tool,,"What is Client's year-over-year revenue comparison?",Single intent - YoY comparison
+"What are the meeting objectives for Client's next call?",nl2sql_tool,,"What are the meeting objectives for Client's upcoming call?",Single intent - meeting objectives
+"Find Client's board composition",rag_tool,"Find Client's board of directors and senior management composition",,Single intent - board composition
+"What is the status of Deal DEF789?",nl2sql_tool,,"What is the current status and progress of Deal DEF789?",Single intent - deal status
+"Summarize Client's risk profile",rag_tool,"Summarize Client's overall risk profile and assessment",,Single intent - risk profile
+"List deals by product type for Client",nl2sql_tool,,"List all deals for Client grouped by product type with values",Single intent - deals by product
+"What are Client's payment obligations?",nl2sql_tool,,"What are Client's total payment obligations and due dates?",Single intent - payment obligations
+"Find Client's ESG report highlights",rag_tool,"Find the key highlights from Client's ESG report",,Single intent - ESG highlights
+"What is Client's exposure by product?",nl2sql_tool,,"What is Client's exposure breakdown by product type?",Single intent - exposure breakdown
+"Get Client's annualized revenue from pipeline",nl2sql_tool,,"What is Client's annualized revenue from the deal pipeline?",Single intent - annualized revenue
+"Find Client's historical credit ratings",rag_tool,"Find Client's historical credit ratings and assessments",,Single intent - credit ratings history
+"What meetings are scheduled for Client this month?",nl2sql_tool,,"What meetings are scheduled for Client this month with dates and objectives?",Single intent - scheduled meetings
+"What is Client's coalition wallet share?",nl2sql_tool,,"What is Client's coalition wallet share compared to SCB?",Single intent - wallet share
+"Find Client's governance disclosures",rag_tool,"Find Client's corporate governance disclosures",,Single intent - governance disclosures
+"How many products does Client use?",nl2sql_tool,,"How many different products does Client currently use?",Single intent - product count
+"What is Client's deal activity this year?",nl2sql_tool,,"What is Client's deal activity this year including deal count and values?",Single intent - deal activity
+"Find Client's sustainability report",rag_tool,"Find Client's sustainability and ESG report",,Single intent - sustainability report
+"What is Client's total asset value?",nl2sql_tool,,"What is Client's total asset value?",Single intent - asset value
+"Summarize Client's credit assessment outcome",rag_tool,"Summarize the outcome and rationale from Client's credit assessment",,Single intent - credit outcome
+"List top deals by value in the pipeline",nl2sql_tool,,"List the top 10 deals by value in the current pipeline",Single intent - top deals
+"What are Client's approval conditions for current deals?",rag_tool,"Find the approval conditions for Client's current deals",,Single intent - approval conditions
+"What is Client's revenue by region?",nl2sql_tool,,"What is Client's revenue breakdown by region?",Single intent - regional revenue
+"Find Client's strategic goals from annual report",rag_tool,"Find Client's strategic goals and objectives from annual report",,Single intent - strategic goals
+"What is Client's current pipeline value?",nl2sql_tool,,"What is the total value of Client's current deal pipeline?",Single intent - pipeline value
+"Get Client's call report from last quarter",nl2sql_tool,,"Get the call report details for Client from last quarter",Single intent - historical call report
+"What risks are flagged for Client?",rag_tool,"Find the risks flagged in Client's risk analysis",,Single intent - flagged risks
+"What is Client's year-to-date income?",nl2sql_tool,,"What is Client's year-to-date income?",Single intent - YTD income
+"Find Client's ESG commitments and financials","rag_tool,nl2sql_tool","Find Client's ESG commitments and sustainability goals","What is Client's total revenue and assets?",Multi-intent: ESG + financials
+"What deals has Client participated in?",nl2sql_tool,,"List all deals that Client has participated in with SCB's role",Single intent - deal participation
+"Find Client's management team bios",rag_tool,"Find the senior management team bios for Client",,Single intent - management bios
+"What is Client's contingent liability exposure?",nl2sql_tool,,"What is Client's total contingent liability exposure?",Single intent - contingent liability
+"Summarize Client's financial performance",nl2sql_tool,,"Summarize Client's financial performance including revenue, assets, and liabilities",Single intent - financial summary
+"What are Client's regulatory requirements?",rag_tool,"Find Client's regulatory requirements and compliance filings",,Single intent - regulatory requirements
+"How has Client's wallet share changed?",nl2sql_tool,,"How has Client's wallet share changed year-over-year?",Single intent - wallet share trend
+"Find Client's deal approval status",rag_tool,"Find the approval status for Client's deals",,Single intent - deal approval
+"What products are in Client's portfolio?",nl2sql_tool,,"What products are in Client's current portfolio?",Single intent - product portfolio
+"Get Client's ESG rating",rag_tool,"Find Client's ESG rating and sustainability score",,Single intent - ESG rating
+"What is Client's total exposure to SCB?",nl2sql_tool,,"What is Client's total exposure to Standard Chartered Bank?",Single intent - SCB exposure
+"List Client's completed deals this year",nl2sql_tool,,"List Client's completed deals this year with values and dates",Single intent - completed deals
+"Find Client's annual report summary",rag_tool,"Find a summary of Client's annual report",,Single intent - annual report
+"What is Client's risk-weighted assets?",nl2sql_tool,,"What are Client's risk-weighted assets?",Single intent - RWA query
+"Get Client's meeting notes from last month",nl2sql_tool,,"Get the meeting notes from all meetings with Client last month",Single intent - meeting notes
+"What is Client's credit rating history?",rag_tool,"Find Client's credit rating history and changes",,Single intent - rating history
+"How many new deals for Client in Q2?",nl2sql_tool,,"How many new deals were initiated for Client in Q2?",Single intent - new deals count
+"Find Client's board structure",rag_tool,"Find Client's board structure and governance model",,Single intent - board structure
+"What is Client's revenue by product?",nl2sql_tool,,"What is Client's revenue breakdown by product?",Single intent - product revenue
+"Summarize Client's sustainability performance",rag_tool,"Summarize Client's sustainability and ESG performance",,Single intent - sustainability summary
+"What are Client's upcoming payment dates?",nl2sql_tool,,"What are Client's upcoming payment dates and amounts?",Single intent - payment schedule
+"Find Client's deal rationale from documents",rag_tool,"Find the deal rationale and strategic fit for Client's deals",,Single intent - deal rationale
+"What is Client's market coverage?",nl2sql_tool,,"What is Client's market coverage by region and product?",Single intent - market coverage
+"Get Client's call objectives",nl2sql_tool,,"What are the objectives for Client's upcoming calls?",Single intent - call objectives
+"What are Client's ESG targets?",rag_tool,"Find Client's ESG targets and sustainability commitments",,Single intent - ESG targets
+"List Client's active products",nl2sql_tool,,"List all active products for Client with revenue contribution",Single intent - active products
+"Find Client's financial disclosures",rag_tool,"Find Client's financial disclosures and statements",,Single intent - financial disclosures
+"What is Client's deal pipeline status?",nl2sql_tool,,"What is the status of Client's deal pipeline?",Single intent - pipeline status
+"Get Client's historical meeting data",nl2sql_tool,,"Get Client's historical meeting data from the last 12 months",Single intent - historical meetings
+"What is Client's approval track record?",rag_tool,"Find Client's deal approval track record and history",,Single intent - approval history
+"What is Client's total liabilities?",nl2sql_tool,,"What is Client's total liabilities?",Single intent - total liabilities
+"Find Client's credit risk assessment",rag_tool,"Find Client's credit risk assessment and rating rationale",,Single intent - credit risk
+"How many client meetings this quarter?",nl2sql_tool,,"How many client meetings were held this quarter?",Single intent - meeting count aggregate
+"What is Client's income breakdown?",nl2sql_tool,,"What is Client's income breakdown by source?",Single intent - income breakdown
+"Find Client's strategic initiatives",rag_tool,"Find Client's strategic initiatives from annual report",,Single intent - strategic initiatives
+"What deals are in Client's pipeline?",nl2sql_tool,,"What deals are in Client's pipeline with expected close dates?",Single intent - pipeline deals
+"Get Client's ESG disclosure details",rag_tool,"Get the details of Client's ESG disclosures",,Single intent - ESG details
+"What is Client's asset composition?",nl2sql_tool,,"What is Client's asset composition by category?",Single intent - asset composition
+"Find Client's transaction documentation",rag_tool,"Find Client's transaction documentation and deal records",,Single intent - transaction docs
+"What is Client's revenue growth rate?",nl2sql_tool,,"What is Client's revenue growth rate year-over-year?",Single intent - growth rate
+"List Client's credit facilities",nl2sql_tool,,"List all credit facilities for Client with limits and utilization",Single intent - credit facilities
+"What are Client's governance practices?",rag_tool,"Find Client's corporate governance practices and policies",,Single intent - governance practices
+"What is Client's exposure concentration?",nl2sql_tool,,"What is Client's exposure concentration by product and region?",Single intent - exposure concentration
+"Find Client's sustainability metrics",rag_tool,"Find Client's sustainability metrics and KPIs",,Single intent - sustainability metrics
+"What meetings does Client have scheduled?",nl2sql_tool,,"What meetings does Client have scheduled for this month?",Single intent - scheduled meetings
+"What is Client's deal success rate?",nl2sql_tool,,"What is Client's deal success rate and conversion metrics?",Single intent - success rate
+"Find Client's public filings",rag_tool,"Find Client's public filings and announcements",,Single intent - public filings
+"What is Client's RWA breakdown?",nl2sql_tool,,"What is Client's risk-weighted assets breakdown by risk type?",Single intent - RWA breakdown
+"Summarize Client's call history",nl2sql_tool,,"Summarize Client's call history from the last 6 months",Single intent - call history summary
+"What are Client's rating outlooks?",rag_tool,"Find Client's credit rating outlooks and assessments",,Single intent - rating outlooks
+"How many deals closed for Client last year?",nl2sql_tool,,"How many deals closed for Client last year with total value?",Single intent - closed deals count
+"Find Client's annual report financials",rag_tool,"Find Client's financial data from annual report",,Single intent - annual report financials
+"What is Client's payment history?",nl2sql_tool,,"What is Client's payment history and track record?",Single intent - payment history
+"Get Client's deal terms",rag_tool,"Get the terms and conditions for Client's deals",,Single intent - deal terms
+"What products drive Client's revenue?",nl2sql_tool,,"Which products drive the most revenue for Client?",Single intent - revenue drivers
+"What is Client's total facility size?",nl2sql_tool,,"What is Client's total credit facility size?",Single intent - facility size
+"Find Client's ESG strategy",rag_tool,"Find Client's ESG strategy and implementation plan",,Single intent - ESG strategy
+"List Client's recent transactions",nl2sql_tool,,"List Client's recent transactions with values and dates",Single intent - recent transactions
+"What is Client's risk profile score?",rag_tool,"What is Client's overall risk profile score?",,Single intent - risk score
+"What are Client's covenant requirements?",rag_tool,"Find Client's covenant requirements and conditions",,Single intent - covenant requirements
+"How has Client's asset base grown?",nl2sql_tool,,"How has Client's asset base grown over the last 2 years?",Single intent - asset growth
+"Find Client's sustainability initiatives",rag_tool,"Find Client's sustainability initiatives and programs",,Single intent - sustainability initiatives
+"What is Client's utilization rate?",nl2sql_tool,,"What is Client's credit facility utilization rate?",Single intent - utilization rate
+"Get Client's meeting summaries","rag_tool,nl2sql_tool","Find Client's meeting summaries and notes from documents","Get Client's call report details from database",Multi-intent: meeting info from both sources
+"What is Client's sector classification?",nl2sql_tool,,"What is Client's sector classification and segment?",Single intent - sector classification
+"Find Client's board committee structure",rag_tool,"Find Client's board committee structure and membership",,Single intent - committee structure
+"What deals are pending for Client?",nl2sql_tool,,"What deals are pending for Client with approval status?",Single intent - pending deals
+"What is Client's ESG disclosure quality?",rag_tool,"Assess Client's ESG disclosure quality and completeness",,Single intent - ESG quality
+"List Client's revenue by month",nl2sql_tool,,"List Client's revenue by month for the last 12 months",Single intent - monthly revenue
+"Find Client's strategic priorities",rag_tool,"Find Client's strategic priorities and business objectives",,Single intent - strategic priorities
+"What is Client's liability structure?",nl2sql_tool,,"What is Client's liability structure by type?",Single intent - liability structure
+"Get Client's deal participation history",nl2sql_tool,,"Get Client's history of deal participation with SCB",Single intent - participation history
+"What are Client's credit limits?",nl2sql_tool,,"What are Client's credit limits by facility?",Single intent - credit limits
+"Find Client's risk factors",rag_tool,"Find the risk factors identified for Client",,Single intent - risk factors
+"What is Client's contingent exposure by type?",nl2sql_tool,,"What is Client's contingent exposure breakdown by type?",Single intent - contingent breakdown
+"Summarize Client's annual performance",nl2sql_tool,,"Summarize Client's annual performance metrics",Single intent - annual performance
+"What are Client's ESG risks?",rag_tool,"Find Client's ESG-related risks and exposures",,Single intent - ESG risks
+"What products has Client used?",nl2sql_tool,,"What products has Client used in the last 2 years?",Single intent - product usage
+"Find Client's governance score",rag_tool,"Find Client's corporate governance score and rating",,Single intent - governance score
+"What is Client's expected deal revenue?",nl2sql_tool,,"What is Client's expected revenue from deals in the pipeline?",Single intent - expected deal revenue
+"List Client's payment defaults",nl2sql_tool,,"List any payment defaults for Client with dates and amounts",Single intent - payment defaults
+"What is Client's sustainability rating?",rag_tool,"What is Client's sustainability rating and score?",,Single intent - sustainability rating
+"What deals has Client won?",nl2sql_tool,,"What deals has Client won with SCB this year?",Single intent - won deals
+"Find Client's credit assessment summary",rag_tool,"Find a summary of Client's credit assessment",,Single intent - credit summary
+"What is Client's revenue concentration?",nl2sql_tool,,"What is Client's revenue concentration by product and region?",Single intent - revenue concentration
+"Get Client's call participants",nl2sql_tool,,"Who were the participants in Client's last call?",Single intent - call participants
+"What are Client's disclosure requirements?",rag_tool,"Find Client's disclosure requirements and obligations",,Single intent - disclosure requirements
+"What is Client's facility utilization trend?",nl2sql_tool,,"What is Client's facility utilization trend over the last 6 months?",Single intent - utilization trend
+"Find Client's management changes",rag_tool,"Find any recent management changes for Client",,Single intent - management changes
+"How many products for Client by revenue tier?",nl2sql_tool,,"How many products does Client have by revenue tier?",Single intent - product tier analysis
+"What is Client's deal win rate?",nl2sql_tool,,"What is Client's deal win rate with SCB?",Single intent - win rate
+"Find Client's ESG commitments and pipeline","rag_tool,nl2sql_tool","Find Client's ESG commitments and sustainability goals","What is Client's deal pipeline value and expected revenue?",Multi-intent: ESG + pipeline
+"What are Client's account balances?",nl2sql_tool,,"What are Client's current account balances?",Single intent - account balances
+"Summarize Client's risk assessment",rag_tool,"Summarize Client's comprehensive risk assessment",,Single intent - risk assessment summary
+"What is Client's revenue per product?",nl2sql_tool,,"What is Client's revenue per product for the current year?",Single intent - revenue per product
+"Find Client's annual disclosures",rag_tool,"Find Client's annual disclosures and reports",,Single intent - annual disclosures
+"What meetings are overdue for Client?",nl2sql_tool,,"What meetings are overdue for Client with last meeting date?",Single intent - overdue meetings
+"What is Client's creditworthiness trend?",rag_tool,"What is the trend in Client's creditworthiness?",,Single intent - creditworthiness trend
+"List Client's active facilities",nl2sql_tool,,"List all active credit facilities for Client",Single intent - active facilities
+"What are Client's strategic disclosures?",rag_tool,"Find Client's strategic disclosures and business plans",,Single intent - strategic disclosures
+"What is Client's exposure at default?",nl2sql_tool,,"What is Client's exposure at default by product?",Single intent - EAD
+"Find Client's sustainability commitments",rag_tool,"Find Client's sustainability commitments and targets",,Single intent - sustainability commitments
+"What is Client's income YTD?",nl2sql_tool,,"What is Client's income year-to-date?",Single intent - YTD income
+"Get Client's deal structure details",rag_tool,"Get the detailed deal structure for Client's transactions",,Single intent - deal structure details
+"What products are underutilized for Client?",nl2sql_tool,,"What products are underutilized for Client?",Single intent - underutilized products
+"What is Client's governance rating?",rag_tool,"What is Client's corporate governance rating?",,Single intent - governance rating
+"How has Client's revenue trend been?",nl2sql_tool,,"How has Client's revenue trend been over the last 12 months?",Single intent - revenue trend
+"Find Client's ESG performance metrics",rag_tool,"Find Client's ESG performance metrics and scores",,Single intent - ESG metrics
+"What is Client's total deal count?",nl2sql_tool,,"What is Client's total deal count with SCB?",Single intent - deal count
+"List Client's covenant compliance",nl2sql_tool,,"List Client's covenant compliance status",Single intent - covenant compliance
+"What are Client's board committees?",rag_tool,"What are Client's board committees and their functions?",,Single intent - board committees
+"What is Client's asset growth rate?",nl2sql_tool,,"What is Client's asset growth rate year-over-year?",Single intent - asset growth rate
+"Find Client's credit review dates",nl2sql_tool,,"When are Client's next credit review dates?",Single intent - review dates
+"What is Client's ESG disclosure level?",rag_tool,"What is Client's level of ESG disclosure?",,Single intent - ESG disclosure level
+"What deals has Client lost?",nl2sql_tool,,"What deals has Client lost to competitors?",Single intent - lost deals
+"Get Client's call report summary",nl2sql_tool,,"Get a summary of Client's call reports from last quarter",Single intent - call summary
+"What are Client's risk limits?",nl2sql_tool,,"What are Client's risk limits by category?",Single intent - risk limits
+"Find Client's sustainability targets",rag_tool,"Find Client's sustainability targets and milestones",,Single intent - sustainability targets
+"What is Client's revenue forecast?",nl2sql_tool,,"What is Client's revenue forecast for next quarter?",Single intent - revenue forecast
+"What products generate Client's income?",nl2sql_tool,,"What products generate the most income for Client?",Single intent - income generators
+"Find Client's approval documentation",rag_tool,"Find Client's deal approval documentation",,Single intent - approval docs
+"What is Client's facility usage pattern?",nl2sql_tool,,"What is Client's facility usage pattern over time?",Single intent - usage pattern
+"List Client's ESG initiatives",rag_tool,"List Client's ESG initiatives and programs",,Single intent - ESG initiatives
+"What is Client's pipeline conversion rate?",nl2sql_tool,,"What is Client's pipeline conversion rate?",Single intent - conversion rate
+"What are Client's credit terms?",nl2sql_tool,,"What are Client's credit terms and conditions?",Single intent - credit terms
+"Find Client's strategic report",rag_tool,"Find Client's strategic report and business outlook",,Single intent - strategic report
+"What is Client's liability to asset ratio?",nl2sql_tool,,"What is Client's liability to asset ratio?",Single intent - liability ratio
+"How many calls for Client this year?",nl2sql_tool,,"How many calls have been held with Client this year?",Single intent - call count
+"What is Client's ESG risk exposure?",rag_tool,"What is Client's ESG risk exposure?",,Single intent - ESG risk
+"What deals are at risk for Client?",nl2sql_tool,,"What deals are at risk for Client in the pipeline?",Single intent - at-risk deals
+"Find Client's governance framework",rag_tool,"Find Client's corporate governance framework",,Single intent - governance framework
+"What is Client's revenue from top products?",nl2sql_tool,,"What is Client's revenue from top 5 products?",Single intent - top product revenue
+"What are Client's meeting frequencies?",nl2sql_tool,,"What are Client's meeting frequencies by quarter?",Single intent - meeting frequency
+"Get Client's sustainability scorecard",rag_tool,"Get Client's sustainability scorecard and ratings",,Single intent - sustainability scorecard
+"What is Client's credit facility count?",nl2sql_tool,,"How many credit facilities does Client have?",Single intent - facility count
+"Find Client's transaction rationale",rag_tool,"Find the rationale for Client's transactions",,Single intent - transaction rationale
+"What is Client's exposure trend?",nl2sql_tool,,"What is Client's exposure trend over the last 6 months?",Single intent - exposure trend
+"What are Client's disclosure gaps?",rag_tool,"What are Client's disclosure gaps and missing information?",,Single intent - disclosure gaps
+"List Client's revenue drivers",nl2sql_tool,,"List the key revenue drivers for Client",Single intent - revenue drivers list
+"What is Client's deal participation rate?",nl2sql_tool,,"What is Client's deal participation rate with SCB?",Single intent - participation rate
+"Find Client's ESG disclosure trends",rag_tool,"Find Client's ESG disclosure trends over time",,Single intent - ESG trends
+"What is Client's income stability?",nl2sql_tool,,"How stable is Client's income month-over-month?",Single intent - income stability
+"What products has Client discontinued?",nl2sql_tool,,"What products has Client discontinued in the last year?",Single intent - discontinued products
+"Find Client's credit monitoring status",rag_tool,"Find Client's credit monitoring status and alerts",,Single intent - monitoring status
+"What is Client's pipeline health?",nl2sql_tool,,"What is the health of Client's deal pipeline?",Single intent - pipeline health
+"Get Client's annual meeting schedule",nl2sql_tool,,"Get Client's annual meeting schedule and frequency",Single intent - meeting schedule
+"What are Client's ESG KPIs?",rag_tool,"What are Client's ESG KPIs and performance indicators?",,Single intent - ESG KPIs
+"What is Client's utilization by facility?",nl2sql_tool,,"What is Client's utilization rate by credit facility?",Single intent - facility utilization
+"Find Client's board independence info",rag_tool,"Find information about Client's board independence",,Single intent - board independence
+"What deals closed for Client last month?",nl2sql_tool,,"What deals closed for Client last month?",Single intent - recent closed deals
+"What is Client's sustainability maturity?",rag_tool,"What is Client's sustainability maturity level?",,Single intent - sustainability maturity
+"List Client's payment schedule",nl2sql_tool,,"List Client's upcoming payment schedule",Single intent - payment schedule
+"What are Client's strategic risks?",rag_tool,"What are Client's strategic risks identified in reports?",,Single intent - strategic risks
+"What is Client's revenue per employee?",nl2sql_tool,,"What is Client's revenue per employee metric?",Single intent - revenue per employee
+"Find Client's governance disclosures","rag_tool,nl2sql_tool","Find Client's governance disclosures and policies","What is Client's board composition and governance data?",Multi-intent: governance from both sources
+"What is Client's deal success pattern?",nl2sql_tool,,"What is Client's pattern of deal success?",Single intent - success pattern
+"What are Client's ESG commitments?",rag_tool,"What are Client's ESG commitments and goals?",,Single intent - ESG commitments
+"How has Client's credit evolved?",nl2sql_tool,,"How has Client's credit profile evolved over time?",Single intent - credit evolution
+"Find Client's annual sustainability report",rag_tool,"Find Client's annual sustainability report",,Single intent - sustainability report
+"What is Client's product diversification?",nl2sql_tool,,"What is Client's product diversification score?",Single intent - diversification
+"What meetings has Client missed?",nl2sql_tool,,"What meetings has Client missed or cancelled?",Single intent - missed meetings
+"What is Client's risk rating trend?",rag_tool,"What is Client's risk rating trend over time?",,Single intent - risk rating trend
+"List Client's active deals",nl2sql_tool,,"List all active deals for Client with values",Single intent - active deals
+"What is Client's ESG integration level?",rag_tool,"What is Client's level of ESG integration?",,Single intent - ESG integration
+"What is Client's revenue volatility?",nl2sql_tool,,"What is Client's revenue volatility measure?",Single intent - revenue volatility
+"Find Client's credit policy exceptions",nl2sql_tool,,"Find any credit policy exceptions for Client",Single intent - policy exceptions
+"What are Client's disclosure standards?",rag_tool,"What are Client's disclosure standards and practices?",,Single intent - disclosure standards
+"What is Client's facility renewal status?",nl2sql_tool,,"What is Client's facility renewal status and dates?",Single intent - renewal status
+"Get Client's strategic plan summary",rag_tool,"Get a summary of Client's strategic plan",,Single intent - strategic plan
+"What is Client's asset turnover?",nl2sql_tool,,"What is Client's asset turnover ratio?",Single intent - asset turnover
+"What products are new for Client?",nl2sql_tool,,"What new products has Client adopted this year?",Single intent - new products
+"Find Client's sustainability roadmap",rag_tool,"Find Client's sustainability roadmap and timeline",,Single intent - sustainability roadmap
+"What is Client's call coverage ratio?",nl2sql_tool,,"What is Client's call coverage ratio?",Single intent - coverage ratio
+"What are Client's credit covenants?",nl2sql_tool,,"What are Client's credit covenants and conditions?",Single intent - credit covenants
+"List Client's ESG achievements",rag_tool,"List Client's ESG achievements and milestones",,Single intent - ESG achievements
+"What is Client's deal flow velocity?",nl2sql_tool,,"What is Client's deal flow velocity?",Single intent - deal velocity
+"What is Client's governance disclosure quality?",rag_tool,"What is the quality of Client's governance disclosures?",,Single intent - governance quality
+"How has Client's wallet share performed?",nl2sql_tool,,"How has Client's wallet share performed against peers?",Single intent - wallet performance
+"What are Client's meeting outcomes?",nl2sql_tool,,"What are the outcomes from Client's recent meetings?",Single intent - meeting outcomes
+"Find Client's ESG strategy document",rag_tool,"Find Client's ESG strategy document",,Single intent - ESG strategy doc
+"What is Client's facility concentration?",nl2sql_tool,,"What is Client's facility concentration risk?",Single intent - facility concentration
+"What is Client's revenue predictability?",nl2sql_tool,,"What is Client's revenue predictability score?",Single intent - predictability
+"Find Client's management quality assessment",rag_tool,"Find Client's management quality assessment",,Single intent - management quality
+"What deals are upcoming for Client?",nl2sql_tool,,"What upcoming deals are expected for Client?",Single intent - upcoming deals
+"What is Client's ESG materiality assessment?",rag_tool,"What is Client's ESG materiality assessment?",,Single intent - ESG materiality
+"List Client's payment trends",nl2sql_tool,,"List Client's payment trends over the last year",Single intent - payment trends
+"What is Client's board effectiveness?",rag_tool,"What is Client's board effectiveness rating?",,Single intent - board effectiveness
+"What is Client's product cross-sell rate?",nl2sql_tool,,"What is Client's product cross-sell rate?",Single intent - cross-sell rate
+"Find Client's sustainability integration",rag_tool,"Find Client's sustainability integration approach",,Single intent - sustainability integration
+"What is Client's revenue concentration risk?",nl2sql_tool,,"What is Client's revenue concentration risk?",Single intent - concentration risk
+"What are Client's call action items?",nl2sql_tool,,"What are the action items from Client's last call?",Single intent - action items
+"What is Client's ESG reporting quality?",rag_tool,"What is Client's ESG reporting quality?",,Single intent - ESG reporting quality
+"What is Client's deal win/loss ratio?",nl2sql_tool,,"What is Client's deal win to loss ratio?",Single intent - win/loss ratio
+"Find Client's credit enhancement details",rag_tool,"Find Client's credit enhancement details",,Single intent - credit enhancement
+"What products has Client consolidated?",nl2sql_tool,,"What products has Client consolidated or reduced?",Single intent - consolidated products
+"What is Client's meeting effectiveness?",nl2sql_tool,,"What is Client's meeting effectiveness score?",Single intent - meeting effectiveness
+"What are Client's governance strengths?",rag_tool,"What are Client's governance strengths?",,Single intent - governance strengths
+"What is Client's pipeline coverage ratio?",nl2sql_tool,,"What is Client's pipeline coverage ratio?",Single intent - coverage ratio
+"Find Client's ESG target progress",rag_tool,"Find Client's progress against ESG targets",,Single intent - ESG progress
+"What is Client's revenue growth trajectory?",nl2sql_tool,,"What is Client's revenue growth trajectory?",Single intent - growth trajectory
+"What are Client's disclosure obligations?",rag_tool,"What are Client's disclosure obligations and requirements?",,Single intent - disclosure obligations
+"List Client's credit migrations",nl2sql_tool,,"List Client's credit rating migrations over time",Single intent - credit migrations
+"What is Client's ESG risk management?",rag_tool,"What is Client's ESG risk management approach?",,Single intent - ESG risk management
+"What is Client's facility utilization efficiency?",nl2sql_tool,,"What is Client's facility utilization efficiency?",Single intent - utilization efficiency
+"Find Client's sustainability leadership info",rag_tool,"Find information about Client's sustainability leadership",,Single intent - sustainability leadership
+"What deals has Client been invited to?",nl2sql_tool,,"What deals has Client been invited to participate in?",Single intent - invited deals
+"What is Client's revenue sustainability?",nl2sql_tool,,"How sustainable is Client's revenue stream?",Single intent - revenue sustainability
+"What are Client's governance weaknesses?",rag_tool,"What are Client's governance weaknesses?",,Single intent - governance weaknesses
+"What is Client's call response time?",nl2sql_tool,,"What is Client's average call response time?",Single intent - response time
+"Find Client's ESG disclosure framework",rag_tool,"Find Client's ESG disclosure framework",,Single intent - ESG framework
+"What is Client's product penetration rate?",nl2sql_tool,,"What is Client's product penetration rate?",Single intent - penetration rate
+"What is Client's deal closure rate?",nl2sql_tool,,"What is Client's deal closure rate?",Single intent - closure rate
+"What are Client's sustainability priorities?",rag_tool,"What are Client's sustainability priorities?",,Single intent - sustainability priorities
+"How has Client's liability structure changed?",nl2sql_tool,,"How has Client's liability structure changed?",Single intent - liability change
+"What is Client's ESG data coverage?",rag_tool,"What is Client's ESG data coverage?",,Single intent - ESG coverage
+"List Client's revenue milestones",nl2sql_tool,,"List Client's revenue milestones achieved",Single intent - revenue milestones
+"What is Client's meeting satisfaction?",nl2sql_tool,,"What is Client's meeting satisfaction score?",Single intent - meeting satisfaction
+"Find Client's climate risk disclosure",rag_tool,"Find Client's climate risk disclosure",,Single intent - climate risk
+"What is Client's asset quality trend?",nl2sql_tool,,"What is Client's asset quality trend?",Single intent - asset quality
+"What products drive Client's profitability?",nl2sql_tool,,"What products drive Client's profitability?",Single intent - profitability drivers
+"What is Client's governance compliance?",rag_tool,"What is Client's governance compliance status?",,Single intent - governance compliance
+"What is Client's pipeline aging?",nl2sql_tool,,"What is Client's pipeline aging analysis?",Single intent - pipeline aging
+"Find Client's stakeholder engagement info",rag_tool,"Find Client's stakeholder engagement information",,Single intent - stakeholder engagement
+"What is Client's revenue per deal?",nl2sql_tool,,"What is Client's average revenue per deal?",Single intent - revenue per deal
+"What are Client's ESG improvement areas?",rag_tool,"What are Client's ESG improvement areas?",,Single intent - ESG improvements
+"What is Client's facility renewal history?",nl2sql_tool,,"What is Client's facility renewal history?",Single intent - renewal history
+"What is Client's strategic positioning?",rag_tool,"What is Client's strategic positioning?",,Single intent - strategic positioning
+"List Client's deal outcomes",nl2sql_tool,,"List Client's deal outcomes by status",Single intent - deal outcomes
+"What is Client's sustainability performance trend?",rag_tool,"What is Client's sustainability performance trend?",,Single intent - sustainability trend
+"What is Client's credit utilization pattern?",nl2sql_tool,,"What is Client's credit utilization pattern?",Single intent - utilization pattern
+"What are Client's ESG initiatives impact?",rag_tool,"What is the impact of Client's ESG initiatives?",,Single intent - ESG impact
+"What is Client's revenue diversification?",nl2sql_tool,,"What is Client's revenue diversification index?",Single intent - diversification index
+"Find Client's meeting frequency trends",nl2sql_tool,,"What are Client's meeting frequency trends?",Single intent - meeting trends
+"What is Client's ESG benchmarking?",rag_tool,"How does Client benchmark on ESG?",,Single intent - ESG benchmarking
+"What is Client's deal sourcing effectiveness?",nl2sql_tool,,"What is Client's deal sourcing effectiveness?",Single intent - sourcing effectiveness
+"What are Client's disclosure best practices?",rag_tool,"What are Client's disclosure best practices?",,Single intent - best practices
+"What is Client's payment behavior score?",nl2sql_tool,,"What is Client's payment behavior score?",Single intent - payment behavior
+"Find Client's sustainability governance",rag_tool,"Find Client's sustainability governance structure",,Single intent - sustainability governance
+"What is Client's product adoption rate?",nl2sql_tool,,"What is Client's product adoption rate?",Single intent - adoption rate
+"What is Client's revenue recognition pattern?",nl2sql_tool,,"What is Client's revenue recognition pattern?",Single intent - revenue recognition
+"What are Client's ESG reporting gaps?",rag_tool,"What are Client's ESG reporting gaps?",,Single intent - reporting gaps
+"How has Client's facility usage evolved?",nl2sql_tool,,"How has Client's facility usage evolved?",Single intent - facility evolution
+"What is Client's board diversity info?",rag_tool,"What is Client's board diversity information?",,Single intent - board diversity
+"What is Client's revenue per meeting?",nl2sql_tool,,"What is Client's revenue generated per meeting?",Single intent - revenue per meeting
+"Find Client's ESG material issues",rag_tool,"Find Client's ESG material issues",,Single intent - ESG material issues
+"What is Client's pipeline efficiency?",nl2sql_tool,,"What is Client's pipeline efficiency ratio?",Single intent - pipeline efficiency
+"What is Client's call completion rate?",nl2sql_tool,,"What is Client's call completion rate?",Single intent - completion rate
+"What is Client's sustainability maturity score?",rag_tool,"What is Client's sustainability maturity score?",,Single intent - maturity score
+"What is Client's deal progression speed?",nl2sql_tool,,"What is Client's average deal progression speed?",Single intent - progression speed
+"What are Client's governance improvements?",rag_tool,"What are Client's governance improvements?",,Single intent - governance improvements
+"List Client's revenue risks",nl2sql_tool,,"List the risks to Client's revenue",Single intent - revenue risks
+"What is Client's ESG integration progress?",rag_tool,"What is Client's ESG integration progress?",,Single intent - ESG integration progress
+"What is Client's facility performance?",nl2sql_tool,,"What is Client's facility performance metrics?",Single intent - facility performance
+"What is Client's strategic alignment?",rag_tool,"What is Client's strategic alignment with SCB?",,Single intent - strategic alignment
+"What products has Client prioritized?",nl2sql_tool,,"What products has Client prioritized this year?",Single intent - prioritized products
+"Find Client's climate commitments",rag_tool,"Find Client's climate commitments and targets",,Single intent - climate commitments
+"What is Client's revenue forecast accuracy?",nl2sql_tool,,"What is Client's revenue forecast accuracy?",Single intent - forecast accuracy
+"What is Client's meeting engagement level?",nl2sql_tool,,"What is Client's meeting engagement level?",Single intent - engagement level
+"What are Client's ESG reporting standards?",rag_tool,"What ESG reporting standards does Client follow?",,Single intent - reporting standards
+"What is Client's deal qualification rate?",nl2sql_tool,,"What is Client's deal qualification rate?",Single intent - qualification rate
+"Find Client's sustainability risks",rag_tool,"Find Client's sustainability-related risks",,Single intent - sustainability risks
+"What is Client's product usage intensity?",nl2sql_tool,,"What is Client's product usage intensity?",Single intent - usage intensity
+"What is Client's governance transparency?",rag_tool,"What is Client's governance transparency level?",,Single intent - governance transparency
+"What is Client's revenue recovery trend?",nl2sql_tool,,"What is Client's revenue recovery trend?",Single intent - recovery trend
+"What are Client's ESG leadership credentials?",rag_tool,"What are Client's ESG leadership credentials?",,Single intent - ESG leadership
+"What is Client's call productivity?",nl2sql_tool,,"What is Client's call productivity metric?",Single intent - call productivity
+"What is Client's facility pricing?",nl2sql_tool,,"What is Client's average facility pricing?",Single intent - facility pricing
+"Find Client's ESG commitment updates",rag_tool,"Find updates on Client's ESG commitments",,Single intent - ESG updates
+"What is Client's revenue resilience?",nl2sql_tool,,"What is Client's revenue resilience score?",Single intent - revenue resilience
+"What is Client's strategic relationship status?",rag_tool,"What is Client's strategic relationship status with SCB?",,Single intent - relationship status
+"List Client's credit facility types",nl2sql_tool,,"List all credit facility types for Client",Single intent - facility types
+"What is Client's ESG disclosure frequency?",rag_tool,"What is Client's ESG disclosure frequency?",,Single intent - disclosure frequency
+"What is Client's deal momentum?",nl2sql_tool,,"What is Client's deal momentum indicator?",Single intent - deal momentum
+"What are Client's meeting best practices?",nl2sql_tool,,"What are the best practices from Client's meetings?",Single intent - best practices
+"What is Client's sustainability reporting quality?",rag_tool,"What is Client's sustainability reporting quality?",,Single intent - reporting quality
+"What is Client's revenue per product tier?",nl2sql_tool,,"What is Client's revenue per product tier?",Single intent - revenue tier
+"Find Client's ESG verification status",rag_tool,"Find Client's ESG verification and assurance status",,Single intent - ESG verification
+"What is Client's pipeline forecast accuracy?",nl2sql_tool,,"What is Client's pipeline forecast accuracy?",Single intent - forecast accuracy
+"What is Client's governance structure effectiveness?",rag_tool,"What is Client's governance structure effectiveness?",,Single intent - structure effectiveness
+"What products are declining for Client?",nl2sql_tool,,"What products are declining for Client?",Single intent - declining products
+"What is Client's ESG innovation status?",rag_tool,"What is Client's ESG innovation status?",,Single intent - ESG innovation
+"What is Client's facility optimization?",nl2sql_tool,,"What is Client's facility optimization level?",Single intent - facility optimization
+"What is Client's strategic initiative progress?",rag_tool,"What is Client's strategic initiative progress?",,Single intent - initiative progress
+"How has Client's call quality evolved?",nl2sql_tool,,"How has Client's call quality evolved?",Single intent - call quality
+"What is Client's sustainability target achievement?",rag_tool,"What is Client's sustainability target achievement rate?",,Single intent - target achievement
+"What is Client's revenue stability index?",nl2sql_tool,,"What is Client's revenue stability index?",Single intent - stability index
+"Find Client's ESG governance practices",rag_tool,"Find Client's ESG governance practices",,Single intent - ESG governance
+"What is Client's deal conversion efficiency?",nl2sql_tool,,"What is Client's deal conversion efficiency?",Single intent - conversion efficiency
+"What is Client's meeting outcome quality?",nl2sql_tool,,"What is Client's meeting outcome quality score?",Single intent - outcome quality
+"What is Client's ESG performance trajectory?",rag_tool,"What is Client's ESG performance trajectory?",,Single intent - ESG trajectory
+"What is Client's product renewal rate?",nl2sql_tool,,"What is Client's product renewal rate?",Single intent - renewal rate
+"What are Client's disclosure innovations?",rag_tool,"What are Client's disclosure innovations?",,Single intent - disclosure innovations
+"What is Client's payment reliability?",nl2sql_tool,,"What is Client's payment reliability score?",Single intent - payment reliability
+"Find Client's sustainability partnerships",rag_tool,"Find Client's sustainability partnerships",,Single intent - partnerships
+"What is Client's revenue growth sustainability?",nl2sql_tool,,"How sustainable is Client's revenue growth?",Single intent - growth sustainability
+"What is Client's ESG data quality?",rag_tool,"What is Client's ESG data quality?",,Single intent - ESG data quality
+"What is Client's facility diversification?",nl2sql_tool,,"What is Client's facility diversification level?",Single intent - facility diversification
+"What is Client's strategic priority alignment?",rag_tool,"What is Client's strategic priority alignment?",,Single intent - priority alignment
+"List Client's deal participation metrics",nl2sql_tool,,"List Client's deal participation metrics",Single intent - participation metrics
+"What is Client's ESG communication quality?",rag_tool,"What is Client's ESG communication quality?",,Single intent - ESG communication
+"What is Client's revenue predictability index?",nl2sql_tool,,"What is Client's revenue predictability index?",Single intent - predictability index
+"Find Client's sustainability performance gaps",rag_tool,"Find Client's sustainability performance gaps",,Single intent - performance gaps
+"What is Client's call planning effectiveness?",nl2sql_tool,,"What is Client's call planning effectiveness?",Single intent - planning effectiveness
+"What is Client's governance evolution?",rag_tool,"What is Client's governance evolution over time?",,Single intent - governance evolution
+"What is Client's deal portfolio quality?",nl2sql_tool,,"What is Client's deal portfolio quality score?",Single intent - portfolio quality
+"What are Client's ESG disclosure innovations?",rag_tool,"What are Client's ESG disclosure innovations?",,Single intent - ESG innovations
+"What is Client's meeting frequency optimization?",nl2sql_tool,,"What is Client's meeting frequency optimization?",Single intent - frequency optimization
+"What is Client's credit structure quality?",nl2sql_tool,,"What is Client's credit structure quality?",Single intent - structure quality
+"Find Client's sustainability strategy updates",rag_tool,"Find Client's sustainability strategy updates",,Single intent - strategy updates
+"What is Client's revenue composition stability?",nl2sql_tool,,"What is Client's revenue composition stability?",Single intent - composition stability
+"What is Client's ESG leadership recognition?",rag_tool,"What ESG leadership recognition has Client received?",,Single intent - ESG recognition
+"What is Client's facility management efficiency?",nl2sql_tool,,"What is Client's facility management efficiency?",Single intent - management efficiency
+"What is Client's strategic disclosure quality?",rag_tool,"What is Client's strategic disclosure quality?",,Single intent - strategic disclosure
+"List Client's revenue optimization opportunities",nl2sql_tool,,"List Client's revenue optimization opportunities",Single intent - optimization opportunities
+"What is Client's ESG risk mitigation?",rag_tool,"What is Client's ESG risk mitigation approach?",,Single intent - risk mitigation
+"What is Client's deal execution quality?",nl2sql_tool,,"What is Client's deal execution quality score?",Single intent - execution quality
+"Find Client's sustainability integration maturity",rag_tool,"Find Client's sustainability integration maturity",,Single intent - integration maturity
+"What is Client's product performance variance?",nl2sql_tool,,"What is Client's product performance variance?",Single intent - performance variance
+"What is Client's governance accountability?",rag_tool,"What is Client's governance accountability level?",,Single intent - governance accountability
+"What is Client's pipeline health indicators?",nl2sql_tool,,"What are Client's pipeline health indicators?",Single intent - health indicators
+"What are Client's ESG performance drivers?",rag_tool,"What are Client's ESG performance drivers?",,Single intent - ESG drivers
+"What is Client's call effectiveness trend?",nl2sql_tool,,"What is Client's call effectiveness trend?",Single intent - effectiveness trend
+"What is Client's facility utilization trend?",nl2sql_tool,,"What is Client's facility utilization trend?",Single intent - utilization trend
+"Find Client's ESG commitment credibility",rag_tool,"What is Client's ESG commitment credibility?",,Single intent - ESG credibility
+"What is Client's revenue optimization level?",nl2sql_tool,,"What is Client's revenue optimization level?",Single intent - optimization level
+"What is Client's strategic partnership status?",rag_tool,"What is Client's strategic partnership status?",,Single intent - partnership status
+"What is Client's credit facility optimization?",nl2sql_tool,,"What is Client's credit facility optimization?",Single intent - facility optimization
+"What is Client's ESG reporting transparency?",rag_tool,"What is Client's ESG reporting transparency?",,Single intent - reporting transparency
+"What is Client's deal sourcing quality?",nl2sql_tool,,"What is Client's deal sourcing quality?",Single intent - sourcing quality
+"What is Client's meeting productivity trend?",nl2sql_tool,,"What is Client's meeting productivity trend?",Single intent - productivity trend
+"Find Client's sustainability target setting",rag_tool,"Find Client's sustainability target setting process",,Single intent - target setting
+"What is Client's revenue diversification score?",nl2sql_tool,,"What is Client's revenue diversification score?",Single intent - diversification score
+"What is Client's governance effectiveness trend?",rag_tool,"What is Client's governance effectiveness trend?",,Single intent - effectiveness trend
+"What is Client's pipeline velocity?",nl2sql_tool,,"What is Client's pipeline velocity?",Single intent - pipeline velocity
+"What are Client's ESG materiality priorities?",rag_tool,"What are Client's ESG materiality priorities?",,Single intent - materiality priorities
+"What is Client's payment pattern stability?",nl2sql_tool,,"What is Client's payment pattern stability?",Single intent - pattern stability
+"Find Client's sustainability performance benchmarks",rag_tool,"Find Client's sustainability performance benchmarks",,Single intent - benchmarks
+"What is Client's facility renewal efficiency?",nl2sql_tool,,"What is Client's facility renewal efficiency?",Single intent - renewal efficiency
+"What is Client's strategic initiative success?",rag_tool,"What is Client's strategic initiative success rate?",,Single intent - initiative success
+"How has Client's product mix evolved?",nl2sql_tool,,"How has Client's product mix evolved?",Single intent - product mix
+"What is Client's sustainability reporting maturity?",rag_tool,"What is Client's sustainability reporting maturity?",,Single intent - reporting maturity
+"What is Client's revenue per product metric?",nl2sql_tool,,"What is Client's revenue per product metric?",Single intent - per product metric
+"Find Client's ESG stakeholder engagement",rag_tool,"Find Client's ESG stakeholder engagement approach",,Single intent - stakeholder engagement
+"What is Client's deal win rate trend?",nl2sql_tool,,"What is Client's deal win rate trend?",Single intent - win rate trend
+"What is Client's call follow-up effectiveness?",nl2sql_tool,,"What is Client's call follow-up effectiveness?",Single intent - follow-up effectiveness
+"What is Client's ESG performance consistency?",rag_tool,"What is Client's ESG performance consistency?",,Single intent - ESG consistency
+"What is Client's product cross-sell success?",nl2sql_tool,,"What is Client's product cross-sell success rate?",Single intent - cross-sell success
+"What are Client's disclosure process improvements?",rag_tool,"What are Client's disclosure process improvements?",,Single intent - process improvements
+"What is Client's revenue leakage status?",nl2sql_tool,,"What is Client's revenue leakage status?",Single intent - revenue leakage
+"Find Client's sustainability reporting alignment",rag_tool,"Find Client's sustainability reporting alignment",,Single intent - reporting alignment
+"What is Client's facility pricing trend?",nl2sql_tool,,"What is Client's facility pricing trend?",Single intent - pricing trend
+"What is Client's ESG integration maturity?",rag_tool,"What is Client's ESG integration maturity?",,Single intent - integration maturity
+"What is Client's revenue capture efficiency?",nl2sql_tool,,"What is Client's revenue capture efficiency?",Single intent - capture efficiency
+"What is Client's strategic account status?",rag_tool,"What is Client's strategic account status?",,Single intent - account status
+"List Client's credit structure components",nl2sql_tool,,"List Client's credit structure components",Single intent - structure components
+"What is Client's ESG disclosure comprehensiveness?",rag_tool,"What is Client's ESG disclosure comprehensiveness?",,Single intent - comprehensiveness
+"What is Client's deal pipeline quality?",nl2sql_tool,,"What is Client's deal pipeline quality score?",Single intent - pipeline quality
+"What is Client's meeting engagement trend?",nl2sql_tool,,"What is Client's meeting engagement trend?",Single intent - engagement trend
+"Find Client's sustainability commitment verification",rag_tool,"Find Client's sustainability commitment verification",,Single intent - commitment verification
+"What is Client's revenue growth quality?",nl2sql_tool,,"What is Client's revenue growth quality?",Single intent - growth quality
+"What is Client's governance risk profile?",rag_tool,"What is Client's governance risk profile?",,Single intent - governance risk
+"What is Client's pipeline conversion trend?",nl2sql_tool,,"What is Client's pipeline conversion trend?",Single intent - conversion trend
+"What are Client's ESG improvement initiatives?",rag_tool,"What are Client's ESG improvement initiatives?",,Single intent - improvement initiatives
+"What is Client's call scheduling efficiency?",nl2sql_tool,,"What is Client's call scheduling efficiency?",Single intent - scheduling efficiency
+"What is Client's facility performance trend?",nl2sql_tool,,"What is Client's facility performance trend?",Single intent - performance trend
+"Find Client's ESG target setting quality",rag_tool,"What is Client's ESG target setting quality?",,Single intent - target quality
+"What is Client's revenue management effectiveness?",nl2sql_tool,,"What is Client's revenue management effectiveness?",Single intent - management effectiveness
+"What is Client's strategic relationship depth?",rag_tool,"What is Client's strategic relationship depth?",,Single intent - relationship depth
+"What is Client's credit utilization efficiency?",nl2sql_tool,,"What is Client's credit utilization efficiency?",Single intent - utilization efficiency
+"What is Client's ESG performance attribution?",rag_tool,"What is Client's ESG performance attribution?",,Single intent - ESG attribution
+"What is Client's deal qualification quality?",nl2sql_tool,,"What is Client's deal qualification quality?",Single intent - qualification quality
+"What is Client's meeting preparation effectiveness?",nl2sql_tool,,"What is Client's meeting preparation effectiveness?",Single intent - preparation effectiveness
+"Find Client's sustainability strategy effectiveness",rag_tool,"What is Client's sustainability strategy effectiveness?",,Single intent - strategy effectiveness
+"What is Client's product profitability trend?",nl2sql_tool,,"What is Client's product profitability trend?",Single intent - profitability trend
+"What is Client's governance oversight quality?",rag_tool,"What is Client's governance oversight quality?",,Single intent - oversight quality
+"What is Client's pipeline opportunity quality?",nl2sql_tool,,"What is Client's pipeline opportunity quality?",Single intent - opportunity quality
+"What are Client's ESG communication effectiveness?",rag_tool,"What is Client's ESG communication effectiveness?",,Single intent - communication effectiveness
+"What is Client's payment performance trend?",nl2sql_tool,,"What is Client's payment performance trend?",Single intent - payment trend
+"Find Client's sustainability risk management",rag_tool,"Find Client's sustainability risk management approach",,Single intent - sustainability risk
+"What is Client's facility utilization rate?",nl2sql_tool,,"What is Client's current facility utilization rate?",Single intent - utilization rate
+"What is Client's strategic execution status?",rag_tool,"What is Client's strategic execution status?",,Single intent - execution status
+"What is Client's revenue trend stability?",nl2sql_tool,,"What is Client's revenue trend stability?",Single intent - trend stability
+"What is Client's ESG disclosure reliability?",rag_tool,"What is Client's ESG disclosure reliability?",,Single intent - disclosure reliability
+"What is Client's credit facility performance?",nl2sql_tool,,"What is Client's credit facility performance?",Single intent - facility performance
+"What is Client's deal progression quality?",nl2sql_tool,,"What is Client's deal progression quality?",Single intent - progression quality
+"What is Client's meeting outcome achievement?",nl2sql_tool,,"What is Client's meeting outcome achievement rate?",Single intent - outcome achievement
+"Find Client's ESG performance drivers",rag_tool,"What are Client's ESG performance drivers?",,Single intent - performance drivers
+"What is Client's revenue per facility?",nl2sql_tool,,"What is Client's revenue per credit facility?",Single intent - revenue per facility
+"What is Client's governance structure quality?",rag_tool,"What is Client's governance structure quality?",,Single intent - structure quality
+"What is Client's pipeline forecast reliability?",nl2sql_tool,,"What is Client's pipeline forecast reliability?",Single intent - forecast reliability
+"What are Client's ESG strategy execution?",rag_tool,"What is Client's ESG strategy execution status?",,Single intent - strategy execution
+"What is Client's call outcome quality?",nl2sql_tool,,"What is Client's call outcome quality?",Single intent - outcome quality
+"What is Client's facility renewal quality?",nl2sql_tool,,"What is Client's facility renewal quality?",Single intent - renewal quality
+"Find Client's sustainability performance consistency",rag_tool,"What is Client's sustainability performance consistency?",,Single intent - performance consistency
+"What is Client's revenue optimization progress?",nl2sql_tool,,"What is Client's revenue optimization progress?",Single intent - optimization progress
+"What is Client's strategic initiative quality?",rag_tool,"What is Client's strategic initiative quality?",,Single intent - initiative quality
+"List Client's deal win factors",nl2sql_tool,,"What are Client's deal win factors?",Single intent - win factors
+"What is Client's ESG target progress rate?",rag_tool,"What is Client's ESG target progress rate?",,Single intent - progress rate
+"What is Client's deal closure quality?",nl2sql_tool,,"What is Client's deal closure quality?",Single intent - closure quality
+"What is Client's meeting efficiency score?",nl2sql_tool,,"What is Client's meeting efficiency score?",Single intent - efficiency score
+"Find Client's sustainability reporting consistency",rag_tool,"What is Client's sustainability reporting consistency?",,Single intent - reporting consistency
+"What is Client's product revenue stability?",nl2sql_tool,,"What is Client's product revenue stability?",Single intent - revenue stability
+"What is Client's governance practice quality?",rag_tool,"What is Client's governance practice quality?",,Single intent - practice quality
+"What is Client's pipeline management effectiveness?",nl2sql_tool,,"What is Client's pipeline management effectiveness?",Single intent - management effectiveness
+"What are Client's ESG outcome achievements?",rag_tool,"What are Client's ESG outcome achievements?",,Single intent - outcome achievements
+"What is Client's payment timeliness score?",nl2sql_tool,,"What is Client's payment timeliness score?",Single intent - timeliness score
+"Find Client's sustainability integration effectiveness",rag_tool,"What is Client's sustainability integration effectiveness?",,Single intent - integration effectiveness
+"What is Client's facility management quality?",nl2sql_tool,,"What is Client's facility management quality?",Single intent - management quality
+"What is Client's strategic alignment quality?",rag_tool,"What is Client's strategic alignment quality?",,Single intent - alignment quality
+"What is Client's call productivity trend?",nl2sql_tool,,"What is Client's call productivity trend?",Single intent - productivity trend
+"What is Client's ESG commitment strength?",rag_tool,"What is Client's ESG commitment strength?",,Single intent - commitment strength
+"What is Client's revenue management quality?",nl2sql_tool,,"What is Client's revenue management quality?",Single intent - management quality
+"Find Client's ESG performance trajectory",rag_tool,"What is Client's ESG performance trajectory?",,Single intent - ESG trajectory
+"What is Client's deal portfolio performance?",nl2sql_tool,,"What is Client's deal portfolio performance?",Single intent - portfolio performance
+"What is Client's meeting planning quality?",nl2sql_tool,,"What is Client's meeting planning quality?",Single intent - planning quality
+"What is Client's ESG disclosure effectiveness?",rag_tool,"What is Client's ESG disclosure effectiveness?",,Single intent - disclosure effectiveness
+"What is Client's product performance quality?",nl2sql_tool,,"What is Client's product performance quality?",Single intent - performance quality
+"What is Client's governance improvement rate?",rag_tool,"What is Client's governance improvement rate?",,Single intent - improvement rate
+"What is Client's revenue growth sustainability?",nl2sql_tool,,"How sustainable is Client's revenue growth?",Single intent - growth sustainability
+"Find Client's sustainability commitment strength",rag_tool,"What is Client's sustainability commitment strength?",,Single intent - commitment strength
+"What is Client's facility structure quality?",nl2sql_tool,,"What is Client's facility structure quality?",Single intent - structure quality
+"What is Client's ESG target achievement quality?",rag_tool,"What is Client's ESG target achievement quality?",,Single intent - achievement quality
+"What is Client's revenue diversification quality?",nl2sql_tool,,"What is Client's revenue diversification quality?",Single intent - diversification quality
+"What is Client's strategic execution effectiveness?",rag_tool,"What is Client's strategic execution effectiveness?",,Single intent - execution effectiveness
+"What is Client's credit performance quality?",nl2sql_tool,,"What is Client's credit performance quality?",Single intent - performance quality
+"What is Client's ESG reporting effectiveness?",rag_tool,"What is Client's ESG reporting effectiveness?",,Single intent - reporting effectiveness
+"What is Client's deal sourcing effectiveness?",nl2sql_tool,,"What is Client's deal sourcing effectiveness?",Single intent - sourcing effectiveness
+"What is Client's meeting follow-up quality?",nl2sql_tool,,"What is Client's meeting follow-up quality?",Single intent - follow-up quality
+"Find Client's sustainability strategy quality",rag_tool,"What is Client's sustainability strategy quality?",,Single intent - strategy quality
+"What is Client's revenue stability quality?",nl2sql_tool,,"What is Client's revenue stability quality?",Single intent - stability quality
+"What is Client's governance transparency trend?",rag_tool,"What is Client's governance transparency trend?",,Single intent - transparency trend
+"What is Client's pipeline quality score?",nl2sql_tool,,"What is Client's pipeline quality score?",Single intent - quality score
+"What are Client's ESG leadership quality?",rag_tool,"What is Client's ESG leadership quality?",,Single intent - leadership quality
+"What is Client's call scheduling quality?",nl2sql_tool,,"What is Client's call scheduling quality?",Single intent - scheduling quality
+"What is Client's facility optimization quality?",nl2sql_tool,,"What is Client's facility optimization quality?",Single intent - optimization quality
+"Find Client's ESG integration quality",rag_tool,"What is Client's ESG integration quality?",,Single intent - integration quality
+"What is Client's revenue capture quality?",nl2sql_tool,,"What is Client's revenue capture quality?",Single intent - capture quality
+"What is Client's strategic partnership quality?",rag_tool,"What is Client's strategic partnership quality?",,Single intent - partnership quality
+"What is Client's facility utilization quality?",nl2sql_tool,,"What is Client's facility utilization quality?",Single intent - utilization quality
+"What is Client's ESG communication effectiveness?",rag_tool,"What is Client's ESG communication effectiveness?",,Single intent - ESG communication
+"What is Client's deal momentum quality?",nl2sql_tool,,"What is Client's deal momentum quality?",Single intent - momentum quality
+"What is Client's meeting productivity quality?",nl2sql_tool,,"What is Client's meeting productivity quality?",Single intent - productivity quality
+"Find Client's sustainability reporting effectiveness",rag_tool,"What is Client's sustainability reporting effectiveness?",,Single intent - reporting effectiveness
+"What is Client's product mix quality?",nl2sql_tool,,"What is Client's product mix quality?",Single intent - mix quality
+"What is Client's governance accountability quality?",rag_tool,"What is Client's governance accountability quality?",,Single intent - accountability quality
+"What is Client's pipeline velocity quality?",nl2sql_tool,,"What is Client's pipeline velocity quality?",Single intent - velocity quality
+"What are Client's ESG materiality quality?",rag_tool,"What is Client's ESG materiality assessment quality?",,Single intent - materiality quality
+"What is Client's payment reliability quality?",nl2sql_tool,,"What is Client's payment reliability quality?",Single intent - reliability quality
+"Find Client's sustainability performance quality",rag_tool,"What is Client's sustainability performance quality?",,Single intent - performance quality
+"What is Client's facility renewal quality?",nl2sql_tool,,"What is Client's facility renewal quality?",Single intent - renewal quality
+"What is Client's strategic initiative quality?",rag_tool,"What is Client's strategic initiative quality?",,Single intent - initiative quality
+"What is Client's call quality trend?",nl2sql_tool,,"What is Client's call quality trend?",Single intent - quality trend
+"What is Client's sustainability target quality?",rag_tool,"What is Client's sustainability target quality?",,Single intent - target quality
+"What is Client's revenue stability quality?",nl2sql_tool,,"What is Client's revenue stability quality?",Single intent - stability quality
+"Find Client's ESG governance quality",rag_tool,"What is Client's ESG governance quality?",,Single intent - governance quality
+"What is Client's deal conversion quality?",nl2sql_tool,,"What is Client's deal conversion quality?",Single intent - conversion quality
+"What is Client's meeting outcome quality trend?",nl2sql_tool,,"What is Client's meeting outcome quality trend?",Single intent - outcome trend
+"What is Client's ESG performance quality?",rag_tool,"What is Client's ESG performance quality?",,Single intent - ESG quality
+"What is Client's product renewal quality?",nl2sql_tool,,"What is Client's product renewal quality?",Single intent - renewal quality
+"What is Client's disclosure innovation quality?",rag_tool,"What is Client's disclosure innovation quality?",,Single intent - innovation quality
+"What is Client's revenue leakage quality?",nl2sql_tool,,"What is Client's revenue leakage quality?",Single intent - leakage quality
+"Find Client's sustainability governance quality",rag_tool,"What is Client's sustainability governance quality?",,Single intent - governance quality
+"What is Client's product adoption quality?",nl2sql_tool,,"What is Client's product adoption quality?",Single intent - adoption quality
+"What is Client's revenue recognition quality?",nl2sql_tool,,"What is Client's revenue recognition quality?",Single intent - recognition quality
+"What is Client's ESG reporting quality?",rag_tool,"What is Client's ESG reporting quality?",,Single intent - reporting quality
+"What is Client's facility evolution quality?",nl2sql_tool,,"What is Client's facility evolution quality?",Single intent - evolution quality
+"What is Client's board diversity quality?",rag_tool,"What is Client's board diversity quality?",,Single intent - diversity quality
+"What is Client's revenue per meeting quality?",nl2sql_tool,,"What is Client's revenue per meeting quality?",Single intent - per meeting quality
+"Find Client's ESG materiality quality",rag_tool,"What is Client's ESG materiality quality?",,Single intent - materiality quality
+"What is Client's pipeline efficiency quality?",nl2sql_tool,,"What is Client's pipeline efficiency quality?",Single intent - efficiency quality
+"What is Client's call completion quality?",nl2sql_tool,,"What is Client's call completion quality?",Single intent - completion quality
+"What is Client's sustainability maturity quality?",rag_tool,"What is Client's sustainability maturity quality?",,Single intent - maturity quality
+"What is Client's deal progression quality?",nl2sql_tool,,"What is Client's deal progression quality?",Single intent - progression quality
+"What is Client's governance improvement quality?",rag_tool,"What is Client's governance improvement quality?",,Single intent - improvement quality
+"List Client's revenue risk quality",nl2sql_tool,,"What is Client's revenue risk quality?",Single intent - risk quality
+"What is Client's ESG integration quality?",rag_tool,"What is Client's ESG integration quality?",,Single intent - integration quality
+"What is Client's facility performance quality?",nl2sql_tool,,"What is Client's facility performance quality?",Single intent - performance quality
+"What is Client's strategic alignment quality?",rag_tool,"What is Client's strategic alignment quality?",,Single intent - alignment quality
+"What is Client's product priority quality?",nl2sql_tool,,"What is Client's product priority quality?",Single intent - priority quality
+"Find Client's climate commitment quality",rag_tool,"What is Client's climate commitment quality?",,Single intent - climate quality
+"What is Client's forecast accuracy quality?",nl2sql_tool,,"What is Client's forecast accuracy quality?",Single intent - accuracy quality
+"What is Client's meeting engagement quality?",nl2sql_tool,,"What is Client's meeting engagement quality?",Single intent - engagement quality
+"What are Client's ESG standard quality?",rag_tool,"What is Client's ESG standard quality?",,Single intent - standard quality
+"What is Client's deal qualification quality?",nl2sql_tool,,"What is Client's deal qualification quality?",Single intent - qualification quality
+"Find Client's sustainability risk quality",rag_tool,"What is Client's sustainability risk quality?",,Single intent - risk quality
+"What is Client's product usage quality?",nl2sql_tool,,"What is Client's product usage quality?",Single intent - usage quality
+"What is Client's governance transparency quality?",rag_tool,"What is Client's governance transparency quality?",,Single intent - transparency quality
+"What is Client's revenue recovery quality?",nl2sql_tool,,"What is Client's revenue recovery quality?",Single intent - recovery quality
+"What are Client's ESG leadership quality?",rag_tool,"What is Client's ESG leadership quality?",,Single intent - leadership quality
+"What is Client's call productivity quality?",nl2sql_tool,,"What is Client's call productivity quality?",Single intent - productivity quality
+"What is Client's facility pricing quality?",nl2sql_tool,,"What is Client's facility pricing quality?",Single intent - pricing quality
+"Find Client's ESG update quality",rag_tool,"What is Client's ESG update quality?",,Single intent - update quality
+"What is Client's revenue resilience quality?",nl2sql_tool,,"What is Client's revenue resilience quality?",Single intent - resilience quality
+"What is Client's relationship status quality?",rag_tool,"What is Client's relationship status quality?",,Single intent - status quality
+"What is Client's facility type quality?",nl2sql_tool,,"What is Client's facility type quality?",Single intent - type quality
+"What is Client's ESG frequency quality?",rag_tool,"What is Client's ESG frequency quality?",,Single intent - frequency quality
+"What is Client's deal momentum quality?",nl2sql_tool,,"What is Client's deal momentum quality?",Single intent - momentum quality
+"What is Client's meeting best practice quality?",nl2sql_tool,,"What is Client's meeting best practice quality?",Single intent - practice quality
+"Find Client's sustainability reporting quality",rag_tool,"What is Client's sustainability reporting quality?",,Single intent - reporting quality
+"What is Client's revenue tier quality?",nl2sql_tool,,"What is Client's revenue tier quality?",Single intent - tier quality
+"What is Client's ESG verification quality?",rag_tool,"What is Client's ESG verification quality?",,Single intent - verification quality
+"What is Client's forecast accuracy quality?",nl2sql_tool,,"What is Client's forecast accuracy quality?",Single intent - accuracy quality
+"What is Client's governance effectiveness quality?",rag_tool,"What is Client's governance effectiveness quality?",,Single intent - effectiveness quality
+"What products are declining quality for Client?",nl2sql_tool,,"What products are declining quality for Client?",Single intent - declining quality
+"What is Client's ESG innovation quality?",rag_tool,"What is Client's ESG innovation quality?",,Single intent - innovation quality
+"What is Client's facility optimization quality?",nl2sql_tool,,"What is Client's facility optimization quality?",Single intent - optimization quality
+"What is Client's initiative progress quality?",rag_tool,"What is Client's initiative progress quality?",,Single intent - progress quality
+"How has Client's call quality evolved quality?",nl2sql_tool,,"How has Client's call quality evolved quality?",Single intent - evolved quality
+"What is Client's target achievement quality?",rag_tool,"What is Client's target achievement quality?",,Single intent - achievement quality
+"What is Client's stability index quality?",nl2sql_tool,,"What is Client's stability index quality?",Single intent - index quality
+"Find Client's ESG governance quality",rag_tool,"What is Client's ESG governance quality?",,Single intent - governance quality
+"What is Client's conversion efficiency quality?",nl2sql_tool,,"What is Client's conversion efficiency quality?",Single intent - efficiency quality
+"What is Client's outcome quality trend?",nl2sql_tool,,"What is Client's outcome quality trend?",Single intent - outcome trend
+"What is Client's ESG trajectory quality?",rag_tool,"What is Client's ESG trajectory quality?",,Single intent - trajectory quality
+"What is Client's renewal rate quality?",nl2sql_tool,,"What is Client's renewal rate quality?",Single intent - rate quality
+"What is Client's disclosure innovation quality?",rag_tool,"What is Client's disclosure innovation quality?",,Single intent - innovation quality
+"What is Client's payment reliability quality?",nl2sql_tool,,"What is Client's payment reliability quality?",Single intent - reliability quality
+"Find Client's partnership quality",rag_tool,"What is Client's partnership quality?",,Single intent - partnership quality
+"What is Client's growth sustainability quality?",nl2sql_tool,,"What is Client's growth sustainability quality?",Single intent - sustainability quality
+"What is Client's ESG data quality?",rag_tool,"What is Client's ESG data quality?",,Single intent - data quality
+"What is Client's facility diversification quality?",nl2sql_tool,,"What is Client's facility diversification quality?",Single intent - diversification quality
+"What is Client's priority alignment quality?",rag_tool,"What is Client's priority alignment quality?",,Single intent - alignment quality
+"List Client's participation metrics quality",nl2sql_tool,,"What is Client's participation metrics quality?",Single intent - metrics quality
+"What is Client's ESG communication quality?",rag_tool,"What is Client's ESG communication quality?",,Single intent - communication quality
+"What is Client's predictability index quality?",nl2sql_tool,,"What is Client's predictability index quality?",Single intent - predictability quality
+"Find Client's performance gaps quality",rag_tool,"What is Client's performance gaps quality?",,Single intent - gaps quality
+"What is Client's planning effectiveness quality?",nl2sql_tool,,"What is Client's planning effectiveness quality?",Single intent - planning quality
+"What is Client's governance evolution quality?",rag_tool,"What is Client's governance evolution quality?",,Single intent - evolution quality
+"What is Client's portfolio quality score?",nl2sql_tool,,"What is Client's portfolio quality score?",Single intent - portfolio quality
+"What is Client's ESG innovation quality?",rag_tool,"What is Client's ESG innovation quality?",,Single intent - ESG innovation
+"What is Client's frequency optimization quality?",nl2sql_tool,,"What is Client's frequency optimization quality?",Single intent - frequency quality
+"What is Client's credit structure quality?",nl2sql_tool,,"What is Client's credit structure quality?",Single intent - structure quality
+"Find Client's strategy updates quality",rag_tool,"What is Client's strategy updates quality?",,Single intent - updates quality
+"What is Client's composition stability quality?",nl2sql_tool,,"What is Client's composition stability quality?",Single intent - composition quality
+"What is Client's ESG recognition quality?",rag_tool,"What is Client's ESG recognition quality?",,Single intent - recognition quality
+"What is Client's management efficiency quality?",nl2sql_tool,,"What is Client's management efficiency quality?",Single intent - efficiency quality
+"What is Client's strategic disclosure quality?",rag_tool,"What is Client's strategic disclosure quality?",,Single intent - disclosure quality
+"List Client's optimization opportunities quality",nl2sql_tool,,"What is Client's optimization opportunities quality?",Single intent - opportunities quality
+"What is Client's risk mitigation quality?",rag_tool,"What is Client's risk mitigation quality?",,Single intent - mitigation quality
+"What is Client's execution quality score?",nl2sql_tool,,"What is Client's execution quality score?",Single intent - execution quality
+"Find Client's integration maturity quality",rag_tool,"What is Client's integration maturity quality?",,Single intent - maturity quality
+"What is Client's performance variance quality?",nl2sql_tool,,"What is Client's performance variance quality?",Single intent - variance quality
+"What is Client's governance accountability quality?",rag_tool,"What is Client's governance accountability quality?",,Single intent - accountability quality
+"What is Client's health indicators quality?",nl2sql_tool,,"What is Client's health indicators quality?",Single intent - indicators quality
+"What are Client's ESG drivers quality?",rag_tool,"What is Client's ESG drivers quality?",,Single intent - drivers quality
+"What is Client's effectiveness trend quality?",nl2sql_tool,,"What is Client's effectiveness trend quality?",Single intent - trend quality
+"What is Client's utilization trend quality?",nl2sql_tool,,"What is Client's utilization trend quality?",Single intent - trend quality
+"Find Client's ESG credibility quality",rag_tool,"What is Client's ESG credibility quality?",,Single intent - credibility quality
+"What is Client's optimization level quality?",nl2sql_tool,,"What is Client's optimization level quality?",Single intent - level quality
+"What is Client's partnership status quality?",rag_tool,"What is Client's partnership status quality?",,Single intent - partnership quality
+"What is Client's facility optimization quality?",nl2sql_tool,,"What is Client's facility optimization quality?",Single intent - optimization quality
+"What is Client's ESG transparency quality?",rag_tool,"What is Client's ESG transparency quality?",,Single intent - transparency quality
+"What is Client's deal sourcing quality?",nl2sql_tool,,"What is Client's deal sourcing quality?",Single intent - sourcing quality
+"What is Client's productivity trend quality?",nl2sql_tool,,"What is Client's productivity trend quality?",Single intent - trend quality
+"Find Client's target setting quality",rag_tool,"What is Client's target setting quality?",,Single intent - setting quality
+"What is Client's diversification score quality?",nl2sql_tool,,"What is Client's diversification score quality?",Single intent - score quality
+"What is Client's effectiveness trend quality?",rag_tool,"What is Client's effectiveness trend quality?",,Single intent - trend quality
+"What is Client's pipeline velocity quality?",nl2sql_tool,,"What is Client's pipeline velocity quality?",Single intent - velocity quality
+"What are Client's materiality priorities quality?",rag_tool,"What is Client's materiality priorities quality?",,Single intent - priorities quality
+"What is Client's pattern stability quality?",nl2sql_tool,,"What is Client's pattern stability quality?",Single intent - pattern quality
+"Find Client's performance benchmarks quality",rag_tool,"What is Client's performance benchmarks quality?",,Single intent - benchmarks quality
+"What is Client's renewal efficiency quality?",nl2sql_tool,,"What is Client's renewal efficiency quality?",Single intent - efficiency quality
+"What is Client's initiative success quality?",rag_tool,"What is Client's initiative success quality?",,Single intent - success quality
+"How has Client's product mix evolved quality?",nl2sql_tool,,"How has Client's product mix evolved quality?",Single intent - evolved quality
+"What is Client's reporting maturity quality?",rag_tool,"What is Client's reporting maturity quality?",,Single intent - maturity quality
+"What is Client's per product metric quality?",nl2sql_tool,,"What is Client's per product metric quality?",Single intent - metric quality
