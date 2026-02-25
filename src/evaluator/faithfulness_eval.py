@@ -24,16 +24,7 @@ from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
 load_dotenv()
 
-# GEval metric for MCQ correctness evaluation
-correctness_metric = GEval(
-    name="MCQ Correctness",
-    criteria="""
-Check whether the selected option in actual_output
-matches the expected_output exactly.
-Focus on the final answer choice (A/B/C/D/E).
-""",
-    evaluation_params=["actual_output", "expected_output"],
-)
+
 
 
 
@@ -100,6 +91,18 @@ class FaithfulnessEvaluator:
             model=custom_llm,
             include_reason=True
         )
+        
+        # Initialize GEval metric for MCQ correctness
+        self.correctness_metric = GEval(
+            name="MCQ Correctness",
+            criteria="""
+Check whether the selected option in actual_output
+matches the expected_output exactly.
+Focus on the final answer choice (A/B/C/D/E).
+""",
+            evaluation_params=["actual_output", "expected_output"],
+            model=custom_llm
+        )
     
     def evaluate(
         self,
@@ -136,6 +139,39 @@ class FaithfulnessEvaluator:
             passed=self.faithfulness_metric.is_successful(),
             reason=self.faithfulness_metric.reason,
             metric_name="faithfulness"
+        )
+    
+    def evaluate_correctness(
+        self,
+        actual_output: str,
+        expected_output: str,
+        query: str = ""
+    ) -> FaithfulnessResult:
+        """
+        Evaluate MCQ correctness using GEval
+        Checks if actual answer matches expected answer
+        
+        Args:
+            actual_output: The actual answer selected (e.g., "A", "B", "The answer is C")
+            expected_output: The expected correct answer (e.g., "A", "B", "C")
+            query: Optional query context
+            
+        Returns:
+            FaithfulnessResult with correctness score
+        """
+        test_case = LLMTestCase(
+            input=query or "MCQ evaluation",
+            actual_output=actual_output,
+            expected_output=expected_output
+        )
+        
+        self.correctness_metric.measure(test_case)
+        
+        return FaithfulnessResult(
+            score=self.correctness_metric.score,
+            passed=self.correctness_metric.is_successful(),
+            reason=self.correctness_metric.reason,
+            metric_name="correctness"
         )
     
     def evaluate_query_answered(
