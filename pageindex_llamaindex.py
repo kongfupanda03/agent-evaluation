@@ -34,11 +34,39 @@ except ImportError:
 
 class PageIndexDocument:
     """Holds PageIndex tree and PDF for a single document"""
-    def __init__(self, doc_id: str, structure: list, pdf_path: str):
+    
+    @classmethod
+    def from_pdf(cls, doc_id: str, structure: list, pdf_path: str):
+        """Create from PDF (loads fitz document for text extraction)"""
+        doc = cls(doc_id, structure, pdf_path)
+        doc.doc = fitz.open(pdf_path)
+        doc._pdf_loaded = True
+        return doc
+    
+    @classmethod
+    def from_json(cls, json_path: str, doc_id: str = None, pdf_path: str = None):
+        """Create from pre-built PageIndex JSON file"""
+        doc_id = doc_id or os.path.splitext(os.path.basename(json_path))[0]
+        
+        with open(json_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        
+        structure = data.get('structure', [])
+        # pdf_path from JSON data or parameter
+        pdf_path = pdf_path or data.get('pdf_path')
+        
+        doc = cls(doc_id, structure, pdf_path)
+        doc.doc = None  # PDF not loaded by default
+        doc._pdf_loaded = False
+        doc._json_path = json_path
+        return doc
+    
+    def __init__(self, doc_id: str, structure: list, pdf_path: str = None):
         self.doc_id = doc_id
         self.structure = structure
         self.pdf_path = pdf_path
-        self.doc = fitz.open(pdf_path)
+        self.doc = None
+        self._pdf_loaded = False
         self.all_nodes = self._flatten_tree(structure)
     
     def _flatten_tree(self, nodes):
@@ -49,8 +77,16 @@ class PageIndexDocument:
                 result.extend(self._flatten_tree(node['nodes']))
         return result
     
+    def load_pdf(self):
+        """Lazy load PDF for text extraction"""
+        if not self._pdf_loaded and self.pdf_path and os.path.exists(self.pdf_path):
+            self.doc = fitz.open(self.pdf_path)
+            self._pdf_loaded = True
+    
     def close(self):
-        self.doc.close()
+        if self.doc:
+            self.doc.close()
+            self._pdf_loaded = False
 
 
 class PageIndexLlamaRetriever(BaseRetriever):
@@ -83,13 +119,21 @@ class PageIndexLlamaRetriever(BaseRetriever):
     
     def _get_node_text(self, doc: PageIndexDocument, node: dict) -> str:
         """Get full text for a node from a specific document"""
-        start = node.get('start_index', 1)
-        end = node.get('end_index', start)
-        texts = []
-        for page_num in range(start, end + 1):
-            if 1 <= page_num <= len(doc.doc):
-                texts.append(doc.doc[page_num - 1].get_text())
-        return "\n".join(texts)
+        # Lazy load PDF if needed and available
+        doc.load_pdf()
+        
+        if doc._pdf_loaded and doc.doc:
+            # Extract text from PDF pages
+            start = node.get('start_index', 1)
+            end = node.get('end_index', start)
+            texts = []
+            for page_num in range(start, end + 1):
+                if 1 <= page_num <= len(doc.doc):
+                    texts.append(doc.doc[page_num - 1].get_text())
+            return "\n".join(texts)
+        else:
+            # Fallback to summary if PDF not available
+            return node.get('summary', '')
     
     def _retrieve(self, query_bundle: QueryBundle) -> List[NodeWithScore]:
         """
@@ -207,7 +251,8 @@ def main():
         result = page_index_main(pdf_path, opt)
         structure = result.get('structure', [])
         
-        doc = PageIndexDocument(doc_id, structure, pdf_path)
+        # Use from_pdf to create document with PDF loaded
+        doc = PageIndexDocument.from_pdf(doc_id, structure, pdf_path)
         documents.append(doc)
         print(f"    ✓ {len(structure)} top-level sections, {len(doc.all_nodes)} total nodes")
     
@@ -293,6 +338,36 @@ Answer:"""
         print("LlamaIndex not available. Install with: pip install llama-index")
     
     retriever.close()
+    
+    # Example: Loading from pre-built JSON files (no PDF re-processing)
+    print("\n" + "="*60)
+    print("Example: Loading from JSON files")
+    print("="*60)
+    
+    json_files = [
+        ("jd1", "/Users/xiongyuyu/Documents/projects/agent-eval/agent-evaluation/results/jd_structure.json"),
+        # ("doc2", "/path/to/another_structure.json"),
+    ]
+    json_files = [(doc_id, path) for doc_id, path in json_files if os.path.exists(path)]
+    
+    if json_files:
+        print(f"\nLoading {len(json_files)} document(s) from JSON...")
+        json_docs = []
+        for doc_id, json_path in json_files:
+            # Load from JSON - PDF not loaded until needed
+            doc = PageIndexDocument.from_json(json_path, doc_id)
+            json_docs.append(doc)
+            print(f"  ✓ {doc_id}: {len(doc.all_nodes)} nodes (PDF: {'available' if doc.pdf_path else 'not linked'})")
+        
+        # Create retriever from JSON-loaded docs
+        json_retriever = PageIndexLlamaRetriever(json_docs)
+        print(f"\nRetriever ready. Nodes use summaries until PDF is accessed.")
+        
+        # To access full text, PDFs would need to be available:
+        # json_docs[0].load_pdf()  # Lazy load when needed
+        
+        json_retriever.close()
+    
     print("\n" + "="*60)
     print("✓ Done!")
 
