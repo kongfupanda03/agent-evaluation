@@ -18,7 +18,7 @@ from dataclasses import dataclass
 
 from deepeval import evaluate
 from deepeval.metrics import FaithfulnessMetric, GEval
-from deepeval.test_case import LLMTestCase
+from deepeval.test_case import LLMTestCase, LLMTestCaseParams
 from deepeval.models.base_model import DeepEvalBaseLLM
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
@@ -93,15 +93,12 @@ class FaithfulnessEvaluator:
         )
         
         # Initialize GEval metric for MCQ correctness
+        # Note: GEval uses model name string, not custom LLM wrapper
         self.correctness_metric = GEval(
             name="MCQ Correctness",
-            criteria="""
-Check whether the selected option in actual_output
-matches the expected_output exactly.
-Focus on the final answer choice (A/B/C/D/E).
-""",
-            evaluation_params=["actual_output", "expected_output"],
-            model=custom_llm
+            criteria="""Check whether the actual_output matches the expected_output in meaning and content. Consider semantic equivalence, not just exact string match.""",
+            evaluation_params=[LLMTestCaseParams.ACTUAL_OUTPUT, LLMTestCaseParams.EXPECTED_OUTPUT],
+            model=self.model  # Use model name string
         )
     
     def evaluate(
