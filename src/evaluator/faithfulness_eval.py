@@ -18,7 +18,7 @@ from dataclasses import dataclass
 
 from deepeval import evaluate
 from deepeval.metrics import FaithfulnessMetric, GEval
-from deepeval.test_case import LLMTestCase
+from deepeval.test_case import LLMTestCase, LLMTestCaseParams
 from deepeval.models.base_model import DeepEvalBaseLLM
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
@@ -93,15 +93,34 @@ class FaithfulnessEvaluator:
         )
         
         # Initialize GEval metric for MCQ correctness
+        # Note: GEval uses model name string, not custom LLM wrapper
         self.correctness_metric = GEval(
             name="MCQ Correctness",
-            criteria="""
-Check whether the selected option in actual_output
-matches the expected_output exactly.
-Focus on the final answer choice (A/B/C/D/E).
-""",
-            evaluation_params=["actual_output", "expected_output"],
-            model=custom_llm
+            criteria="""Evaluate whether the actual_output correctly matches the expected_output for multiple choice questions (MCQ).
+
+EVALUATION RULES (apply in order of priority):
+
+1. OPTION SELECTION MATCH (Highest Priority):
+   - First, extract the selected option(s) from both actual_output and expected_output
+   - Options can be: letters (A, B, C, D), numbers (1, 2, 3), scores (score 1, score 2), or descriptive labels
+   - If the selected OPTION differs (e.g., actual="A" vs expected="B", or actual="score 1" vs expected="score 2"), the answer is INCORRECT regardless of semantic similarity
+   - For multi-select questions, ALL selected options must match exactly
+
+2. SEMANTIC EQUIVALENCE (Only if option selection matches or for open-ended questions):
+   - If options match or no clear options exist, check if the meaning and content are semantically equivalent
+   - Consider paraphrasing, different wording with same meaning as acceptable
+
+INCORRECT EXAMPLES:
+- Expected: "B. company provides financial estimates for a single scenario", Actual: "A. company provides financial estimates for a range of scenarios" → INCORRECT (different option)
+- Expected: "score 2", Actual: "score 1&2" → INCORRECT (different selection)
+- Expected: "C", Actual: "A" → INCORRECT (different letter option)
+
+CORRECT EXAMPLES:
+- Expected: "B", Actual: "The answer is B" → CORRECT (same option B)
+- Expected: "score 3", Actual: "score 3" → CORRECT (same option)
+- Expected: "A and C", Actual: "Options A, C" → CORRECT (same multi-select)""",
+            evaluation_params=[LLMTestCaseParams.ACTUAL_OUTPUT, LLMTestCaseParams.EXPECTED_OUTPUT],
+            model=self.model  # Use model name string
         )
     
     def evaluate(

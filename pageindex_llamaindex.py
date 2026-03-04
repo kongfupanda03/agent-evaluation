@@ -154,7 +154,7 @@ class PageIndexLlamaRetriever(BaseRetriever):
         
         # Use LLM to reason which nodes are relevant
         prompt = f"""You are given multiple document tables of contents and a user query.
-        Your task is to identify which sections (by unique_id) are most relevant to answer the query.
+        Your task is to identify which sections (by unique_id) are relevant to answer the query.
 
         Documents Structure:
         {chr(10).join(tree_context)}
@@ -164,17 +164,17 @@ class PageIndexLlamaRetriever(BaseRetriever):
         Instructions:
         1. Analyze which sections from which documents are relevant
         2. Consider both section titles and summaries
-        3. Return the unique_ids of most relevant sections (up to 5 across all docs)
-        4. Format: "doc_id:node_id" (e.g., "doc1:0001", "doc2:0003")
+        3. Only return sections with HIGH or MEDIUM relevance (skip LOW relevance)
+        4. Return at most 3 most relevant sections across all docs
+        5. Format: "doc_id:node_id" (e.g., "doc1:0001", "doc2:0003")
 
         Response format (JSON):
         {{
-            "reasoning": "Explain your thinking",
-            "relevant_unique_ids": ["doc1:0001", "doc2:0003"],
-            "confidence": "high/medium/low"
+            "reasoning": "For each selected section, explain: 1) its relevance level (HIGH/MEDIUM/LOW), 2) why it is relevant or not relevant to the query. Be specific about what content matches.",
+            "relevant_unique_ids": ["doc1:0001", "doc2:0003"]
         }}
 
-        Return only the JSON."""
+        Return only the JSON. If no sections are relevant enough, return empty relevant_unique_ids."""
         
         response = ChatGPT_API(model=self.llm_model, prompt=prompt)
         result = extract_json(response)

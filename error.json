@@ -1,0 +1,682 @@
+[
+  {
+    "total_page_number": 72
+  },
+  {
+    "total_token": 0
+  },
+  {
+    "toc_content": null,
+    "toc_page_list": [],
+    "page_index_given_in_toc": "no"
+  },
+  {
+    "message": "len(group_texts): 1"
+  },
+  {
+    "message": "generate_toc: [{'structure': '1', 'title': '<physical_index_1>', 'physical_index': '<physical_index_1>'}, {'structure': '2', 'title': '<physical_index_2>', 'physical_index': '<physical_index_2>'}, {'structure': '3', 'title': '<physical_index_3>', 'physical_index': '<physical_index_3>'}, {'structure': '4', 'title': '<physical_index_4>', 'physical_index': '<physical_index_4>'}, {'structure': '5', 'title': '<physical_index_5>', 'physical_index': '<physical_index_5>'}, {'structure': '6', 'title': '<physical_index_6>', 'physical_index': '<physical_index_6>'}, {'structure': '7', 'title': '<physical_index_7>', 'physical_index': '<physical_index_7>'}, {'structure': '8', 'title': '<physical_index_8>', 'physical_index': '<physical_index_8>'}, {'structure': '9', 'title': '<physical_index_9>', 'physical_index': '<physical_index_9>'}, {'structure': '10', 'title': '<physical_index_10>', 'physical_index': '<physical_index_10>'}, {'structure': '11', 'title': '<physical_index_11>', 'physical_index': '<physical_index_11>'}, {'structure': '12', 'title': '<physical_index_12>', 'physical_index': '<physical_index_12>'}, {'structure': '13', 'title': '<physical_index_13>', 'physical_index': '<physical_index_13>'}, {'structure': '14', 'title': '<physical_index_14>', 'physical_index': '<physical_index_14>'}, {'structure': '15', 'title': '<physical_index_15>', 'physical_index': '<physical_index_15>'}, {'structure': '16', 'title': '<physical_index_16>', 'physical_index': '<physical_index_16>'}, {'structure': '17', 'title': '<physical_index_17>', 'physical_index': '<physical_index_17>'}, {'structure': '18', 'title': '<physical_index_18>', 'physical_index': '<physical_index_18>'}, {'structure': '19', 'title': '<physical_index_19>', 'physical_index': '<physical_index_19>'}, {'structure': '20', 'title': '<physical_index_20>', 'physical_index': '<physical_index_20>'}, {'structure': '21', 'title': '<physical_index_21>', 'physical_index': '<physical_index_21>'}, {'structure': '22', 'title': '<physical_index_22>', 'physical_index': '<physical_index_22>'}, {'structure': '23', 'title': '<physical_index_23>', 'physical_index': '<physical_index_23>'}, {'structure': '24', 'title': '<physical_index_24>', 'physical_index': '<physical_index_24>'}, {'structure': '25', 'title': '<physical_index_25>', 'physical_index': '<physical_index_25>'}, {'structure': '26', 'title': '<physical_index_26>', 'physical_index': '<physical_index_26>'}, {'structure': '27', 'title': '<physical_index_27>', 'physical_index': '<physical_index_27>'}, {'structure': '28', 'title': '<physical_index_28>', 'physical_index': '<physical_index_28>'}, {'structure': '29', 'title': '<physical_index_29>', 'physical_index': '<physical_index_29>'}, {'structure': '30', 'title': '<physical_index_30>', 'physical_index': '<physical_index_30>'}, {'structure': '31', 'title': '<physical_index_31>', 'physical_index': '<physical_index_31>'}, {'structure': '32', 'title': '<physical_index_32>', 'physical_index': '<physical_index_32>'}, {'structure': '33', 'title': '<physical_index_33>', 'physical_index': '<physical_index_33>'}, {'structure': '34', 'title': '<physical_index_34>', 'physical_index': '<physical_index_34>'}, {'structure': '35', 'title': '<physical_index_35>', 'physical_index': '<physical_index_35>'}, {'structure': '36', 'title': '<physical_index_36>', 'physical_index': '<physical_index_36>'}, {'structure': '37', 'title': '<physical_index_37>', 'physical_index': '<physical_index_37>'}, {'structure': '38', 'title': '<physical_index_38>', 'physical_index': '<physical_index_38>'}, {'structure': '39', 'title': '<physical_index_39>', 'physical_index': '<physical_index_39>'}, {'structure': '40', 'title': '<physical_index_40>', 'physical_index': '<physical_index_40>'}, {'structure': '41', 'title': '<physical_index_41>', 'physical_index': '<physical_index_41>'}, {'structure': '42', 'title': '<physical_index_42>', 'physical_index': '<physical_index_42>'}, {'structure': '43', 'title': '<physical_index_43>', 'physical_index': '<physical_index_43>'}, {'structure': '44', 'title': '<physical_index_44>', 'physical_index': '<physical_index_44>'}, {'structure': '45', 'title': '<physical_index_45>', 'physical_index': '<physical_index_45>'}, {'structure': '46', 'title': '<physical_index_46>', 'physical_index': '<physical_index_46>'}, {'structure': '47', 'title': '<physical_index_47>', 'physical_index': '<physical_index_47>'}, {'structure': '48', 'title': '<physical_index_48>', 'physical_index': '<physical_index_48>'}, {'structure': '49', 'title': '<physical_index_49>', 'physical_index': '<physical_index_49>'}, {'structure': '50', 'title': '<physical_index_50>', 'physical_index': '<physical_index_50>'}, {'structure': '51', 'title': '<physical_index_51>', 'physical_index': '<physical_index_51>'}, {'structure': '52', 'title': '<physical_index_52>', 'physical_index': '<physical_index_52>'}, {'structure': '53', 'title': '<physical_index_53>', 'physical_index': '<physical_index_53>'}, {'structure': '54', 'title': '<physical_index_54>', 'physical_index': '<physical_index_54>'}, {'structure': '55', 'title': '<physical_index_55>', 'physical_index': '<physical_index_55>'}, {'structure': '56', 'title': '<physical_index_56>', 'physical_index': '<physical_index_56>'}, {'structure': '57', 'title': '<physical_index_57>', 'physical_index': '<physical_index_57>'}, {'structure': '58', 'title': '<physical_index_58>', 'physical_index': '<physical_index_58>'}, {'structure': '59', 'title': '<physical_index_59>', 'physical_index': '<physical_index_59>'}, {'structure': '60', 'title': '<physical_index_60>', 'physical_index': '<physical_index_60>'}, {'structure': '61', 'title': '<physical_index_61>', 'physical_index': '<physical_index_61>'}, {'structure': '62', 'title': '<physical_index_62>', 'physical_index': '<physical_index_62>'}, {'structure': '63', 'title': '<physical_index_63>', 'physical_index': '<physical_index_63>'}, {'structure': '64', 'title': '<physical_index_64>', 'physical_index': '<physical_index_64>'}, {'structure': '65', 'title': '<physical_index_65>', 'physical_index': '<physical_index_65>'}, {'structure': '66', 'title': '<physical_index_66>', 'physical_index': '<physical_index_66>'}, {'structure': '67', 'title': '<physical_index_67>', 'physical_index': '<physical_index_67>'}, {'structure': '68', 'title': '<physical_index_68>', 'physical_index': '<physical_index_68>'}, {'structure': '69', 'title': '<physical_index_69>', 'physical_index': '<physical_index_69>'}, {'structure': '70', 'title': '<physical_index_70>', 'physical_index': '<physical_index_70>'}, {'structure': '71', 'title': '<physical_index_71>', 'physical_index': '<physical_index_71>'}, {'structure': '72', 'title': '<physical_index_72>', 'physical_index': '<physical_index_72>'}]"
+  },
+  {
+    "message": "convert_physical_index_to_int: [{'structure': '1', 'title': '<physical_index_1>', 'physical_index': 1}, {'structure': '2', 'title': '<physical_index_2>', 'physical_index': 2}, {'structure': '3', 'title': '<physical_index_3>', 'physical_index': 3}, {'structure': '4', 'title': '<physical_index_4>', 'physical_index': 4}, {'structure': '5', 'title': '<physical_index_5>', 'physical_index': 5}, {'structure': '6', 'title': '<physical_index_6>', 'physical_index': 6}, {'structure': '7', 'title': '<physical_index_7>', 'physical_index': 7}, {'structure': '8', 'title': '<physical_index_8>', 'physical_index': 8}, {'structure': '9', 'title': '<physical_index_9>', 'physical_index': 9}, {'structure': '10', 'title': '<physical_index_10>', 'physical_index': 10}, {'structure': '11', 'title': '<physical_index_11>', 'physical_index': 11}, {'structure': '12', 'title': '<physical_index_12>', 'physical_index': 12}, {'structure': '13', 'title': '<physical_index_13>', 'physical_index': 13}, {'structure': '14', 'title': '<physical_index_14>', 'physical_index': 14}, {'structure': '15', 'title': '<physical_index_15>', 'physical_index': 15}, {'structure': '16', 'title': '<physical_index_16>', 'physical_index': 16}, {'structure': '17', 'title': '<physical_index_17>', 'physical_index': 17}, {'structure': '18', 'title': '<physical_index_18>', 'physical_index': 18}, {'structure': '19', 'title': '<physical_index_19>', 'physical_index': 19}, {'structure': '20', 'title': '<physical_index_20>', 'physical_index': 20}, {'structure': '21', 'title': '<physical_index_21>', 'physical_index': 21}, {'structure': '22', 'title': '<physical_index_22>', 'physical_index': 22}, {'structure': '23', 'title': '<physical_index_23>', 'physical_index': 23}, {'structure': '24', 'title': '<physical_index_24>', 'physical_index': 24}, {'structure': '25', 'title': '<physical_index_25>', 'physical_index': 25}, {'structure': '26', 'title': '<physical_index_26>', 'physical_index': 26}, {'structure': '27', 'title': '<physical_index_27>', 'physical_index': 27}, {'structure': '28', 'title': '<physical_index_28>', 'physical_index': 28}, {'structure': '29', 'title': '<physical_index_29>', 'physical_index': 29}, {'structure': '30', 'title': '<physical_index_30>', 'physical_index': 30}, {'structure': '31', 'title': '<physical_index_31>', 'physical_index': 31}, {'structure': '32', 'title': '<physical_index_32>', 'physical_index': 32}, {'structure': '33', 'title': '<physical_index_33>', 'physical_index': 33}, {'structure': '34', 'title': '<physical_index_34>', 'physical_index': 34}, {'structure': '35', 'title': '<physical_index_35>', 'physical_index': 35}, {'structure': '36', 'title': '<physical_index_36>', 'physical_index': 36}, {'structure': '37', 'title': '<physical_index_37>', 'physical_index': 37}, {'structure': '38', 'title': '<physical_index_38>', 'physical_index': 38}, {'structure': '39', 'title': '<physical_index_39>', 'physical_index': 39}, {'structure': '40', 'title': '<physical_index_40>', 'physical_index': 40}, {'structure': '41', 'title': '<physical_index_41>', 'physical_index': 41}, {'structure': '42', 'title': '<physical_index_42>', 'physical_index': 42}, {'structure': '43', 'title': '<physical_index_43>', 'physical_index': 43}, {'structure': '44', 'title': '<physical_index_44>', 'physical_index': 44}, {'structure': '45', 'title': '<physical_index_45>', 'physical_index': 45}, {'structure': '46', 'title': '<physical_index_46>', 'physical_index': 46}, {'structure': '47', 'title': '<physical_index_47>', 'physical_index': 47}, {'structure': '48', 'title': '<physical_index_48>', 'physical_index': 48}, {'structure': '49', 'title': '<physical_index_49>', 'physical_index': 49}, {'structure': '50', 'title': '<physical_index_50>', 'physical_index': 50}, {'structure': '51', 'title': '<physical_index_51>', 'physical_index': 51}, {'structure': '52', 'title': '<physical_index_52>', 'physical_index': 52}, {'structure': '53', 'title': '<physical_index_53>', 'physical_index': 53}, {'structure': '54', 'title': '<physical_index_54>', 'physical_index': 54}, {'structure': '55', 'title': '<physical_index_55>', 'physical_index': 55}, {'structure': '56', 'title': '<physical_index_56>', 'physical_index': 56}, {'structure': '57', 'title': '<physical_index_57>', 'physical_index': 57}, {'structure': '58', 'title': '<physical_index_58>', 'physical_index': 58}, {'structure': '59', 'title': '<physical_index_59>', 'physical_index': 59}, {'structure': '60', 'title': '<physical_index_60>', 'physical_index': 60}, {'structure': '61', 'title': '<physical_index_61>', 'physical_index': 61}, {'structure': '62', 'title': '<physical_index_62>', 'physical_index': 62}, {'structure': '63', 'title': '<physical_index_63>', 'physical_index': 63}, {'structure': '64', 'title': '<physical_index_64>', 'physical_index': 64}, {'structure': '65', 'title': '<physical_index_65>', 'physical_index': 65}, {'structure': '66', 'title': '<physical_index_66>', 'physical_index': 66}, {'structure': '67', 'title': '<physical_index_67>', 'physical_index': 67}, {'structure': '68', 'title': '<physical_index_68>', 'physical_index': 68}, {'structure': '69', 'title': '<physical_index_69>', 'physical_index': 69}, {'structure': '70', 'title': '<physical_index_70>', 'physical_index': 70}, {'structure': '71', 'title': '<physical_index_71>', 'physical_index': 71}, {'structure': '72', 'title': '<physical_index_72>', 'physical_index': 72}]"
+  },
+  {
+    "mode": "process_toc_with_page_numbers",
+    "accuracy": 0.0,
+    "incorrect_results": [
+      {
+        "list_index": 0,
+        "answer": "no",
+        "title": "<physical_index_1>",
+        "page_number": 1
+      },
+      {
+        "list_index": 1,
+        "answer": "no",
+        "title": "<physical_index_2>",
+        "page_number": 2
+      },
+      {
+        "list_index": 2,
+        "answer": "no",
+        "title": "<physical_index_3>",
+        "page_number": 3
+      },
+      {
+        "list_index": 3,
+        "answer": "no",
+        "title": "<physical_index_4>",
+        "page_number": 4
+      },
+      {
+        "list_index": 4,
+        "answer": "no",
+        "title": "<physical_index_5>",
+        "page_number": 5
+      },
+      {
+        "list_index": 5,
+        "answer": "no",
+        "title": "<physical_index_6>",
+        "page_number": 6
+      },
+      {
+        "list_index": 6,
+        "answer": "no",
+        "title": "<physical_index_7>",
+        "page_number": 7
+      },
+      {
+        "list_index": 7,
+        "answer": "no",
+        "title": "<physical_index_8>",
+        "page_number": 8
+      },
+      {
+        "list_index": 8,
+        "answer": "no",
+        "title": "<physical_index_9>",
+        "page_number": 9
+      },
+      {
+        "list_index": 9,
+        "answer": "no",
+        "title": "<physical_index_10>",
+        "page_number": 10
+      },
+      {
+        "list_index": 10,
+        "answer": "no",
+        "title": "<physical_index_11>",
+        "page_number": 11
+      },
+      {
+        "list_index": 11,
+        "answer": "no",
+        "title": "<physical_index_12>",
+        "page_number": 12
+      },
+      {
+        "list_index": 12,
+        "answer": "no",
+        "title": "<physical_index_13>",
+        "page_number": 13
+      },
+      {
+        "list_index": 13,
+        "answer": "no",
+        "title": "<physical_index_14>",
+        "page_number": 14
+      },
+      {
+        "list_index": 14,
+        "answer": "no",
+        "title": "<physical_index_15>",
+        "page_number": 15
+      },
+      {
+        "list_index": 15,
+        "answer": "no",
+        "title": "<physical_index_16>",
+        "page_number": 16
+      },
+      {
+        "list_index": 16,
+        "answer": "no",
+        "title": "<physical_index_17>",
+        "page_number": 17
+      },
+      {
+        "list_index": 17,
+        "answer": "no",
+        "title": "<physical_index_18>",
+        "page_number": 18
+      },
+      {
+        "list_index": 18,
+        "answer": "no",
+        "title": "<physical_index_19>",
+        "page_number": 19
+      },
+      {
+        "list_index": 19,
+        "answer": "no",
+        "title": "<physical_index_20>",
+        "page_number": 20
+      },
+      {
+        "list_index": 20,
+        "answer": "no",
+        "title": "<physical_index_21>",
+        "page_number": 21
+      },
+      {
+        "list_index": 21,
+        "answer": "no",
+        "title": "<physical_index_22>",
+        "page_number": 22
+      },
+      {
+        "list_index": 22,
+        "answer": "no",
+        "title": "<physical_index_23>",
+        "page_number": 23
+      },
+      {
+        "list_index": 23,
+        "answer": "no",
+        "title": "<physical_index_24>",
+        "page_number": 24
+      },
+      {
+        "list_index": 24,
+        "answer": "no",
+        "title": "<physical_index_25>",
+        "page_number": 25
+      },
+      {
+        "list_index": 25,
+        "answer": "no",
+        "title": "<physical_index_26>",
+        "page_number": 26
+      },
+      {
+        "list_index": 26,
+        "answer": "no",
+        "title": "<physical_index_27>",
+        "page_number": 27
+      },
+      {
+        "list_index": 27,
+        "answer": "no",
+        "title": "<physical_index_28>",
+        "page_number": 28
+      },
+      {
+        "list_index": 28,
+        "answer": "no",
+        "title": "<physical_index_29>",
+        "page_number": 29
+      },
+      {
+        "list_index": 29,
+        "answer": "no",
+        "title": "<physical_index_30>",
+        "page_number": 30
+      },
+      {
+        "list_index": 30,
+        "answer": "no",
+        "title": "<physical_index_31>",
+        "page_number": 31
+      },
+      {
+        "list_index": 31,
+        "answer": "no",
+        "title": "<physical_index_32>",
+        "page_number": 32
+      },
+      {
+        "list_index": 32,
+        "answer": "no",
+        "title": "<physical_index_33>",
+        "page_number": 33
+      },
+      {
+        "list_index": 33,
+        "answer": "no",
+        "title": "<physical_index_34>",
+        "page_number": 34
+      },
+      {
+        "list_index": 34,
+        "answer": "no",
+        "title": "<physical_index_35>",
+        "page_number": 35
+      },
+      {
+        "list_index": 35,
+        "answer": "no",
+        "title": "<physical_index_36>",
+        "page_number": 36
+      },
+      {
+        "list_index": 36,
+        "answer": "no",
+        "title": "<physical_index_37>",
+        "page_number": 37
+      },
+      {
+        "list_index": 37,
+        "answer": "no",
+        "title": "<physical_index_38>",
+        "page_number": 38
+      },
+      {
+        "list_index": 38,
+        "answer": "no",
+        "title": "<physical_index_39>",
+        "page_number": 39
+      },
+      {
+        "list_index": 39,
+        "answer": "no",
+        "title": "<physical_index_40>",
+        "page_number": 40
+      },
+      {
+        "list_index": 40,
+        "answer": "no",
+        "title": "<physical_index_41>",
+        "page_number": 41
+      },
+      {
+        "list_index": 41,
+        "answer": "no",
+        "title": "<physical_index_42>",
+        "page_number": 42
+      },
+      {
+        "list_index": 42,
+        "answer": "no",
+        "title": "<physical_index_43>",
+        "page_number": 43
+      },
+      {
+        "list_index": 43,
+        "answer": "no",
+        "title": "<physical_index_44>",
+        "page_number": 44
+      },
+      {
+        "list_index": 44,
+        "answer": "no",
+        "title": "<physical_index_45>",
+        "page_number": 45
+      },
+      {
+        "list_index": 45,
+        "answer": "no",
+        "title": "<physical_index_46>",
+        "page_number": 46
+      },
+      {
+        "list_index": 46,
+        "answer": "no",
+        "title": "<physical_index_47>",
+        "page_number": 47
+      },
+      {
+        "list_index": 47,
+        "answer": "no",
+        "title": "<physical_index_48>",
+        "page_number": 48
+      },
+      {
+        "list_index": 48,
+        "answer": "no",
+        "title": "<physical_index_49>",
+        "page_number": 49
+      },
+      {
+        "list_index": 49,
+        "answer": "no",
+        "title": "<physical_index_50>",
+        "page_number": 50
+      },
+      {
+        "list_index": 50,
+        "answer": "no",
+        "title": "<physical_index_51>",
+        "page_number": 51
+      },
+      {
+        "list_index": 51,
+        "answer": "no",
+        "title": "<physical_index_52>",
+        "page_number": 52
+      },
+      {
+        "list_index": 52,
+        "answer": "no",
+        "title": "<physical_index_53>",
+        "page_number": 53
+      },
+      {
+        "list_index": 53,
+        "answer": "no",
+        "title": "<physical_index_54>",
+        "page_number": 54
+      },
+      {
+        "list_index": 54,
+        "answer": "no",
+        "title": "<physical_index_55>",
+        "page_number": 55
+      },
+      {
+        "list_index": 55,
+        "answer": "no",
+        "title": "<physical_index_56>",
+        "page_number": 56
+      },
+      {
+        "list_index": 56,
+        "answer": "no",
+        "title": "<physical_index_57>",
+        "page_number": 57
+      },
+      {
+        "list_index": 57,
+        "answer": "no",
+        "title": "<physical_index_58>",
+        "page_number": 58
+      },
+      {
+        "list_index": 58,
+        "answer": "no",
+        "title": "<physical_index_59>",
+        "page_number": 59
+      },
+      {
+        "list_index": 59,
+        "answer": "no",
+        "title": "<physical_index_60>",
+        "page_number": 60
+      },
+      {
+        "list_index": 60,
+        "answer": "no",
+        "title": "<physical_index_61>",
+        "page_number": 61
+      },
+      {
+        "list_index": 61,
+        "answer": "no",
+        "title": "<physical_index_62>",
+        "page_number": 62
+      },
+      {
+        "list_index": 62,
+        "answer": "no",
+        "title": "<physical_index_63>",
+        "page_number": 63
+      },
+      {
+        "list_index": 63,
+        "answer": "no",
+        "title": "<physical_index_64>",
+        "page_number": 64
+      },
+      {
+        "list_index": 64,
+        "answer": "no",
+        "title": "<physical_index_65>",
+        "page_number": 65
+      },
+      {
+        "list_index": 65,
+        "answer": "no",
+        "title": "<physical_index_66>",
+        "page_number": 66
+      },
+      {
+        "list_index": 66,
+        "answer": "no",
+        "title": "<physical_index_67>",
+        "page_number": 67
+      },
+      {
+        "list_index": 67,
+        "answer": "no",
+        "title": "<physical_index_68>",
+        "page_number": 68
+      },
+      {
+        "list_index": 68,
+        "answer": "no",
+        "title": "<physical_index_69>",
+        "page_number": 69
+      },
+      {
+        "list_index": 69,
+        "answer": "no",
+        "title": "<physical_index_70>",
+        "page_number": 70
+      },
+      {
+        "list_index": 70,
+        "answer": "no",
+        "title": "<physical_index_71>",
+        "page_number": 71
+      },
+      {
+        "list_index": 71,
+        "answer": "no",
+        "title": "<physical_index_72>",
+        "page_number": 72
+      }
+    ]
+  },
+  {
+    "message": "Low Accuracy - 0.0 in process_no_toc model, continue trying"
+  },
+  {
+    "message": "Checking title appearance in start concurrently"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content, including the section title <physical_index_5>. Therefore, the section cannot start in the beginning of the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content, including the section title <physical_index_7>. Therefore, the section does not start in the beginning of the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content, including the section title <physical_index_4>. Therefore, the section does not start in the beginning of the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content, including the section title <physical_index_8>. Therefore, the section does not start in the beginning of the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content before the section title. Therefore, the section title cannot appear or start in the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content, including the section title <physical_index_25>. Therefore, the section cannot start in the beginning of the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content to check against the section title. Since there is no content, the section title cannot start in the beginning of the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content before the section title. Therefore, the section title cannot appear or start in the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content before the section title. Therefore, the section title cannot appear or start in the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content, including the section title <physical_index_13>. Since the section title cannot appear in an empty page_text, it does not start at the beginning.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content before the section title. Therefore, the section title would start at the beginning if it were present.', 'start_begin': 'yes'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content, including the section title <physical_index_41>. Since the section title cannot appear in the beginning of an empty page_text, it does not start in the beginning.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content before the section title. This implies that the section title, if present, would start at the beginning of the page_text.', 'start_begin': 'yes'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content to check against the section title. Since the page_text does not contain any content, the section title cannot start at the beginning.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content, including the section title <physical_index_34>. Therefore, the section does not start in the beginning of the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content, including the section title <physical_index_11>, in the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content, including the section title <physical_index_3>. Therefore, the section cannot start in the beginning of the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content, including the section title <physical_index_22>. Therefore, the section does not start in the beginning of the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content, including the section title <physical_index_2>. Since the section title cannot appear in an empty page_text, it does not start at the beginning.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content to check against the section title. Since there is no content, the section title cannot start in the beginning of the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content, including the section title <physical_index_24>. Since the section title cannot be the first content in an empty page_text, it does not start in the beginning.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content before the section title. Therefore, the section title can be considered as starting at the beginning of the page_text.', 'start_begin': 'yes'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content before the section title. This implies that the section title, if present, would start at the beginning of the page_text.', 'start_begin': 'yes'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content, including the section title <physical_index_45>. Therefore, the section cannot start in the beginning of the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content, including the section title <physical_index_54>. Since the section title cannot appear in an empty page_text, it does not start in the beginning.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content, including the section title <physical_index_27>. Therefore, the section does not start in the beginning of the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content to check against the section title. Since there is no content, the section title cannot start in the beginning of the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content, including the section title <physical_index_10>, present in the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content to check against the section title. Since there is no content, the section title cannot start at the beginning of the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content to check against the section title. Since there is no content, the section title cannot start in the beginning of the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content before the section title. Therefore, the section title cannot appear or start in the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content, including the section title <physical_index_53>. Since the section title cannot appear in an empty page_text, it does not start in the beginning.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content, including the section title <physical_index_9>, in the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content, including the section title <physical_index_56>. Therefore, the section does not start in the beginning of the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content before the section title. Therefore, the section title can be considered as starting at the beginning of the page_text.', 'start_begin': 'yes'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content to check against the section title. Since there is no content, the section title cannot start at the beginning of the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content, including the section title <physical_index_59>. Since the section title cannot appear in an empty page_text, it does not start at the beginning.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content to check against the section title. Since there is no content, the section title cannot start in the beginning of the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content before the section title <physical_index_21>. This implies that the section title cannot appear or start in the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content, including the section title <physical_index_70>. Since the section title cannot appear in an empty page_text, it does not start at the beginning.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content, including the section title <physical_index_60>. Since the section title cannot appear in an empty page_text, it does not start at the beginning.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content, including the section title <physical_index_12>. Since the section title cannot be the first content in an empty page_text, it does not start in the beginning.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content before the section title. This implies that the section title, if it were present, would start at the beginning of the page_text.', 'start_begin': 'yes'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content to compare with the section title. Since there is no content, the section title cannot start in the beginning of the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content, including the section title <physical_index_23>. Therefore, the section cannot start in the beginning of the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content before the section title <physical_index_71>. Therefore, the section cannot start in the beginning of the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content before the section title. This implies that the section title does not appear in the page_text at all.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content, including the section title <physical_index_26>, at the beginning or anywhere in the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content, including the section title <physical_index_33>. Since the section title cannot appear in an empty page_text, it does not start at the beginning.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content to check against the section title. Since there is no content, the section title cannot start in the beginning of the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content, including the section title <physical_index_15>. Since the section title cannot appear in an empty page_text, it does not start at the beginning.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content before the section title. Therefore, the section title can be considered as starting at the beginning of the page_text.', 'start_begin': 'yes'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content, including the section title <physical_index_40>. Therefore, the section cannot start in the beginning of the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content to check against the section title. Since there is no content, the section title cannot start in the beginning of the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content, including the section title <physical_index_57>. Therefore, the section does not start in the beginning of the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content before the section title. This implies that the section title, if present, would start at the beginning of the page_text.', 'start_begin': 'yes'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content, including the section title <physical_index_6>. Therefore, the section does not start in the beginning of the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content, including the section title <physical_index_51>. Therefore, the section cannot start in the beginning of the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content, including the section title <physical_index_29>. Therefore, the section does not start in the beginning of the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content, including the section title <physical_index_55>. Since the section title cannot appear in an empty page_text, it does not start in the beginning.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content to check against the section title. Since there is no content, the section title cannot start in the beginning of the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content before the section title. Therefore, the section title cannot appear or start in the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content, including the section title <physical_index_48>. Therefore, the section cannot start in the beginning of the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content to compare with the section title. Since there is no content, the section title cannot start at the beginning of the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content, including the section title <physical_index_50>. Since the section title cannot be the first content in an empty page_text, it does not start in the beginning.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content before the section title. Since there is no content at all, the section title cannot start in the beginning of the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content, including the section title <physical_index_31>. Therefore, the section does not start in the beginning of the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content to check against the section title. Since there is no content, the section title cannot start in the beginning of the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content before or after the section title. Since there is no content, the section title cannot appear or start in the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content, including the section title <physical_index_39>, in the page_text.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content, including the section title <physical_index_35>. Since the section title cannot be the first content in an empty page_text, it does not start in the beginning.', 'start_begin': 'no'}"
+  },
+  {
+    "message": "Response: {'thinking': 'The given page_text is empty, so there is no content, including the section title <physical_index_36>. Since the section title cannot appear in an empty page_text, it does not start at the beginning.', 'start_begin': 'no'}"
+  }
+]
